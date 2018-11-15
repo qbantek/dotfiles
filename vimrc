@@ -92,4 +92,7 @@ set splitbelow
 set splitright
 
 " This unsets the "last search pattern" register by hitting return 
-:nnoremap <silent> <CR> :nohlsearch<CR><CR
+:nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+" Map Ctrl-n to NERDTree
+map <C-n> :NERDTreeToggle<CR>
