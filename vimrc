@@ -1,4 +1,3 @@
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -43,7 +42,6 @@ filetype plugin indent on
 syntax on
 set hlsearch
 set background=dark
-set number
 set ic
 set nowrap
 
@@ -81,6 +79,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " show line numbers by default
 set relativenumber
 set number
+set ruler
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -96,3 +95,23 @@ set splitright
 
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
+
+" Can be typed even faster than jj, and if you are already in
+"    normal mode, you (usually) don't accidentally move:
+:inoremap jk <Esc>
+:inoremap kj <Esc>
+
+" Support for gem ctags
+set tags=tags;
+set tags+=gems.tags;
+
+" Enable Elite mode, No ARRRROWWS!!!!
+let g:elite_mode=1
+
+" Disable arrow movement, resize splits instead.
+if get(g:, 'elite_mode')
+  nnoremap <Up>    :resize +2<CR>
+  nnoremap <Down>  :resize -2<CR>
+  nnoremap <Left>  :vertical resize +2<CR>
+  nnoremap <Right> :vertical resize -2<CR>
+endif
