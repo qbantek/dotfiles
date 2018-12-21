@@ -1,3 +1,4 @@
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -19,6 +20,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'jelera/vim-javascript-syntax'
 call vundle#end()
 
 filetype plugin indent on    " required
@@ -91,7 +93,7 @@ set splitbelow
 set splitright
 
 " This unsets the "last search pattern" register by hitting return 
-:nnoremap <silent> <CR> :nohlsearch<CR><CR>
+:nnoremap <silent> <CR> :nohlsearch<CR><CR
 
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -115,3 +117,11 @@ if get(g:, 'elite_mode')
   nnoremap <Left>  :vertical resize +2<CR>
   nnoremap <Right> :vertical resize -2<CR>
 endif
+
+" Folding
+set foldmethod=indent
+set foldlevel=1
+set foldclose=all
+
+let javaScript_fold=1
+
