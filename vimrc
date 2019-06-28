@@ -1,4 +1,4 @@
-
+set encoding=utf-8
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -65,6 +65,9 @@ set softtabstop=2
 
 " this tells vim-rspec to use Send_to_Tmux to run the selected specs.
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+
+" Leader
+let mapleader = " "
 
 " vim-rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>

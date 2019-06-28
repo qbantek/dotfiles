@@ -1,0 +1,7 @@
+--skip-active-record
+--skip-test-unit
+--skip-system-test
+--skip-turbolinks
+--skip-keeps
+--skip-coffee
+--skip-action-cable
