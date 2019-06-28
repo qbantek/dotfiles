@@ -127,4 +127,3 @@ set foldlevel=1
 set foldclose=all
 
 let javaScript_fold=1
-
