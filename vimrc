@@ -7,20 +7,30 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'L9'
-Plugin 'tpope/vim-rails'
+
+" Ruby/Rails-related plugins
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-endwise'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'jgdavey/tslime.vim'
+Plugin 'tpope/vim-rails'
+Plugin 'sodapopcan/vim-rubocop'
+
+" Javascript-related plugins
 Plugin 'elzr/vim-json'
-Plugin 'scrooloose/nerdtree'
+Plugin 'jelera/vim-javascript-syntax'
+
+" Other
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'jelera/vim-javascript-syntax'
+Plugin 'tpope/vim-fugitive'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'L9'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'scrooloose/nerdtree'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'kien/ctrlp.vim'
+Plugin 'wincent/command-t'
 call vundle#end()
 
 filetype plugin indent on    " required
@@ -69,11 +79,17 @@ let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 " Leader
 let mapleader = " "
 
+" Commanf-T
+map <Leader>e <Plug>(CommandT)
+
 " vim-rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+
+" vim-rubocop
+nmap <Leader>ra :RuboCop -a<CR>
 
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
@@ -127,3 +143,4 @@ set foldlevel=1
 set foldclose=all
 
 let javaScript_fold=1
+let vim_markdown_preview_github=1
