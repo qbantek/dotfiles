@@ -1,85 +1,58 @@
 set encoding=utf-8
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-" Ruby/Rails-related plugins
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-rails'
-Plugin 'sodapopcan/vim-rubocop'
-
-" Javascript-related plugins
-Plugin 'elzr/vim-json'
-Plugin 'jelera/vim-javascript-syntax'
-
-" Other
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'tpope/vim-fugitive'
-Plugin 'jgdavey/tslime.vim'
-Plugin 'L9'
-Plugin 'JamshedVesuna/vim-markdown-preview'
-Plugin 'scrooloose/nerdtree'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kien/ctrlp.vim'
-Plugin 'wincent/command-t'
-call vundle#end()
-
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just 
-"                     :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to 
-"                     auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-syntax enable
-filetype plugin indent on
-
-syntax on
-set hlsearch
-set background=dark
-set ic
-set nowrap
-
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-
-set smarttab
-set expandtab
-
-" size of a hard tabstop
-set tabstop=2
-
-" size of an "indent"
-set shiftwidth=2
-
-" a combination of spaces and tabs are used to simulate tab stops at a width
-" other than the (hard)tabstop
-set softtabstop=2
-
-" this tells vim-rspec to use Send_to_Tmux to run the selected specs.
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 " Leader
 let mapleader = " "
 
-" Commanf-T
+set tabstop=2     " 1 tab = 2 spaces
+set shiftwidth=2  " text is indented 2 columns with re-indent operations
+set softtabstop=2 " 1 tab = 2 spaces (insert mode)
+set smarttab      " Uses shiftwidth instead of tabstop at start of lines
+set expandtab     " Replaces tab with spaces
+
+set hlsearch      " Highlight search results
+set nojoinspaces  " Only one space after .
+set background=dark
+set ic            " Ignore case
+set nowrap
+set laststatus=2  " Always display the status line
+
+set autowrite     " Automatically :write before running commands
+set nobackup
+set nowritebackup
+set noswapfile
+
+set spell spelllang=en_us
+set modelines=0   " Disable modelines as a security precaution
+set nomodeline    " Disable modelines as a security precaution
+
+set number
+set relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+set ruler
+set textwidth=80 " Make it obvious where 80 characters is
+set colorcolumn=+1
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+syntax enable
+syntax on
+
+if filereadable(expand("~/.vimrc.bundles"))
+    source ~/.vimrc.bundles
+endif
+
+" this tells vim-rspec to use Send_to_Tmux to run the selected specs.
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+
+" Command-T
 map <Leader>e <Plug>(CommandT)
 
 " vim-rspec mappings
@@ -91,25 +64,14 @@ map <Leader>a :call RunAllSpecs()<CR>
 " vim-rubocop
 nmap <Leader>ra :RuboCop -a<CR>
 
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
+" YouCompleteMe
+let g:ycm_key_list_select_completion = ['<C-j>']
+let g:ycm_key_list_previous_completion = ['<C-k>']
+
+" UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" show line numbers by default
-set relativenumber
-set number
-set ruler
-
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " This unsets the "last search pattern" register by hitting return 
 :nnoremap <silent> <CR> :nohlsearch<CR><CR
@@ -117,8 +79,7 @@ set splitright
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-" Can be typed even faster than jj, and if you are already in
-"    normal mode, you (usually) don't accidentally move:
+" Map jk & kj to Esc
 :inoremap jk <Esc>
 :inoremap kj <Esc>
 
@@ -126,10 +87,10 @@ map <C-n> :NERDTreeToggle<CR>
 set tags=tags;
 set tags+=gems.tags;
 
-" Enable Elite mode, No ARRRROWWS!!!!
+" Enable Elite mode, NO ARROWS!
 let g:elite_mode=1
 
-" Disable arrow movement, resize splits instead.
+" Disable arrow movement, re-size splits instead.
 if get(g:, 'elite_mode')
   nnoremap <Up>    :resize +2<CR>
   nnoremap <Down>  :resize -2<CR>
@@ -137,10 +98,11 @@ if get(g:, 'elite_mode')
   nnoremap <Right> :vertical resize -2<CR>
 endif
 
-" Folding
-set foldmethod=indent
-set foldlevel=1
-set foldclose=all
-
-let javaScript_fold=1
 let vim_markdown_preview_github=1
+
+augroup markdownSpell
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal spell
+augroup END
+
