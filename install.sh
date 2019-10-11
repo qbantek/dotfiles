@@ -4,7 +4,9 @@
 set -eo pipefail
 
 basedir="$HOME/projects/dotfiles"
+vundledir="$HOME/.vim/bundle/Vundle.vim"
 repourl="git@github.com:qbantek/dotfiles.git"
+vundleurl="git@github.com:VundleVim/Vundle.vim.git"
 
 function symlink() {
   src="$1"
@@ -33,6 +35,7 @@ function symlink() {
   ln -sf "$src" "$dest"
 }
 
+
 if [ -d "$basedir/.git" ]; then
   echo "Updating dotfiles using existing git..."
   cd "$basedir"
@@ -41,6 +44,16 @@ else
   echo "Checking out dotfiles using git..."
   rm -rf "$basedir"
   git clone --quiet --depth=1 "$repourl" "$basedir"
+fi
+
+if [ -d "$vundledir/.git" ]; then
+  echo "Updating Vundle using existing git..."
+  cd "$vundledir"
+  git pull --quiet --rebase origin master || exit 1
+else
+  echo "Checking out Vundle using git..."
+  rm -rf "$vundledir"
+  git clone --quiet --depth=1 "$vundleurl" "$vundledir"
 fi
 
 cd "$basedir"
