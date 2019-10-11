@@ -45,4 +45,9 @@ fi
 
 cd "$basedir"
 
+echo "Creating symlinks..."
+symlink "$basedir/.vim/vimrc" "$HOME/.vimrc"
+symlink "$basedir/.vim/vimrc.bundles" "$HOME/.vimrc.bundles"
+
+echo "Done."
 }
