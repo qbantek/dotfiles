@@ -46,7 +46,7 @@ syntax enable
 syntax on
 
 if filereadable(expand("~/.vimrc.bundles"))
-    source ~/.vimrc.bundles
+  source ~/.vimrc.bundles
 endif
 
 " this tells vim-rspec to use Send_to_Tmux to run the selected specs.
