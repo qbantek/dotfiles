@@ -3,15 +3,14 @@ set encoding=utf-8
 " Leader
 let mapleader = " "
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set smarttab
-set expandtab
+set tabstop=2     " 1 tab = 2 spaces
+set shiftwidth=2  " text is indented 2 columns with re-indent operations
+set softtabstop=2 " 1 tab = 2 spaces (insert mode)
+set smarttab      " Uses shiftwidth instead of tabstop at start of lines
+set expandtab     " Replaces tab with spaces
 
-set hlsearch
-set nojoinspaces
+set hlsearch      " Highlight search results
+set nojoinspaces  " Only one space after .
 set background=dark
 set ic            " Ignore case
 set nowrap
@@ -22,17 +21,26 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set history=50
 set spell spelllang=en_us
 set modelines=0   " Disable modelines as a security precaution
-set nomodeline
+set nomodeline    " Disable modelines as a security precaution
 
-set relativenumber
 set number
+set relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 set ruler
 set textwidth=80 " Make it obvious where 80 characters is
 set colorcolumn=+1
 highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
 
 syntax enable
 syntax on
@@ -60,15 +68,10 @@ nmap <Leader>ra :RuboCop -a<CR>
 let g:ycm_key_list_select_completion = ['<C-j>']
 let g:ycm_key_list_previous_completion = ['<C-k>']
 
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
+" UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
 
 " This unsets the "last search pattern" register by hitting return 
 :nnoremap <silent> <CR> :nohlsearch<CR><CR
@@ -76,8 +79,7 @@ set splitright
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-" Can be typed even faster than jj, and if you are already in
-"    normal mode, you (usually) don't accidentally move:
+" Map jk & kj to Esc
 :inoremap jk <Esc>
 :inoremap kj <Esc>
 
@@ -85,10 +87,10 @@ map <C-n> :NERDTreeToggle<CR>
 set tags=tags;
 set tags+=gems.tags;
 
-" Enable Elite mode, No ARRRROWWS!!!!
+" Enable Elite mode, NO ARROWS!
 let g:elite_mode=1
 
-" Disable arrow movement, resize splits instead.
+" Disable arrow movement, re-size splits instead.
 if get(g:, 'elite_mode')
   nnoremap <Up>    :resize +2<CR>
   nnoremap <Down>  :resize -2<CR>
