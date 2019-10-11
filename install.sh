@@ -50,4 +50,5 @@ symlink "$basedir/.vim/vimrc" "$HOME/.vimrc"
 symlink "$basedir/.vim/vimrc.bundles" "$HOME/.vimrc.bundles"
 
 echo "Done."
-}
+
+} # This ensures the entire script is downloaded.
