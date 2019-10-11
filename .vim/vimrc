@@ -101,8 +101,8 @@ endif
 let vim_markdown_preview_github=1
 
 augroup markdownSpell
-    autocmd!
-    autocmd FileType markdown setlocal spell
-    autocmd BufRead,BufNewFile *.md setlocal spell
+  autocmd!
+  autocmd FileType markdown setlocal spell
+  autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
