@@ -10,6 +10,7 @@ set smarttab      " Uses shiftwidth instead of tabstop at start of lines
 set expandtab     " Replaces tab with spaces
 
 set hlsearch      " Highlight search results
+set incsearch     " Show search results as I type
 set nojoinspaces  " Only one space after .
 set background=dark
 set ic            " Ignore case
@@ -49,11 +50,20 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
+if has("clipboard")
+  " CTRL-X is Cut
+  vnoremap <C-X> "+x
+
+  " CTRL-C is Copy
+  vnoremap <C-C> "+y
+
+  " CTRL-V is Paste
+  map <C-V> "+gP
+  cmap <C-V> <C-R>+
+endif
+
 " this tells vim-rspec to use Send_to_Tmux to run the selected specs.
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
-
-" Command-T
-map <Leader>e <Plug>(CommandT)
 
 " vim-rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -87,17 +97,14 @@ map <C-n> :NERDTreeToggle<CR>
 set tags=tags;
 set tags+=gems.tags;
 
-" Enable Elite mode, NO ARROWS!
-let g:elite_mode=1
-
 " Disable arrow movement, re-size splits instead.
-if get(g:, 'elite_mode')
-  nnoremap <Up>    :resize +2<CR>
-  nnoremap <Down>  :resize -2<CR>
-  nnoremap <Left>  :vertical resize +2<CR>
-  nnoremap <Right> :vertical resize -2<CR>
-endif
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
 
+" map markdown preview
+nmap <leader>m :!open -a "Marked 2" "%"<cr><cr>
 let vim_markdown_preview_github=1
 
 augroup markdownSpell
@@ -106,3 +113,5 @@ augroup markdownSpell
   autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
+" Correct last spelling issue
+nmap <Leader>z [s1z=
