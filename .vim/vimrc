@@ -62,6 +62,9 @@ if has("clipboard")
   cmap <C-V> <C-R>+
 endif
 
+" Command-T
+map <Leader>e <Plug>(CommandT)
+
 " this tells vim-rspec to use Send_to_Tmux to run the selected specs.
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
