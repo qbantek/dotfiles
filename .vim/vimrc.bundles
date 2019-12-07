@@ -18,6 +18,9 @@ Plugin 'sodapopcan/vim-rubocop'
 Plugin 'elzr/vim-json'
 Plugin 'jelera/vim-javascript-syntax'
 
+" Go
+Plugin 'fatih/vim-go'
+
 " Auto completion
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
