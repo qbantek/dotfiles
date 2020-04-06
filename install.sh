@@ -60,6 +60,7 @@ cd "$basedir"
 
 echo "Creating symlinks..."
 echo " --bash"
+symlink "$basedir/bash_profile" "$HOME/.bash_profile"
 symlink "$basedir/bashrc" "$HOME/.bashrc"
 symlink "$basedir/bash_aliases" "$HOME/.bash_aliases"
 
