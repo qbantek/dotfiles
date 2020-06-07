@@ -119,3 +119,10 @@ augroup END
 
 " Correct last spelling issue
 nmap <Leader>z [s1z=
+
+" Toggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" vim-go
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
