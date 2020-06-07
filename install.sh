@@ -68,6 +68,9 @@ echo " --vim"
 symlink "$basedir/.vim/vimrc" "$HOME/.vimrc"
 symlink "$basedir/.vim/vimrc.bundles" "$HOME/.vimrc.bundles"
 
+echo " --tmux"
+symlink "$basedir/tmux.conf" "$HOME/.tmux.conf"
+
 echo "Done."
 
 } # This ensures the entire script is downloaded.
