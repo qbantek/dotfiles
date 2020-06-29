@@ -125,3 +125,6 @@ map <leader>ss :setlocal spell!<cr>
 " vim-go
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+" Ignore when expanding wildcards
+set wildignore=*/node_modules/*, *tmp/*, *.idea/*, *.git/*
