@@ -78,6 +78,7 @@ map <Leader>a :call RunAllSpecs()<CR>
 nmap <Leader>ra :RuboCop -a<CR>
 
 " YouCompleteMe
+let g:ycm_clangd_binary_path = "/usr/lib/llvm-10/bin/clangd"
 let g:ycm_key_list_select_completion = ['<C-j>']
 let g:ycm_key_list_previous_completion = ['<C-k>']
 
@@ -123,8 +124,20 @@ nmap <Leader>z [s1z=
 map <leader>ss :setlocal spell!<cr>
 
 " vim-go
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 " Ignore when expanding wildcards
-set wildignore=*/node_modules/*, *tmp/*, *.idea/*, *.git/*
+set wildignore=*/node_modules/*,*/tmp/*,*/.idea/*,*/.git/*
