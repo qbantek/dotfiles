@@ -39,6 +39,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
 Plugin 'wincent/command-t'
 Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'wakatime/vim-wakatime'
 call vundle#end()
 
 filetype plugin indent on    " required
