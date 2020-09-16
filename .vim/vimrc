@@ -22,7 +22,11 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set spell spelllang=en_us
+augroup markdownSpell
+  autocmd!
+  autocmd FileType markdown setlocal spell spelllang=en_us
+  autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
+augroup END
 set modelines=0   " Disable modelines as a security precaution
 set nomodeline    " Disable modelines as a security precaution
 
