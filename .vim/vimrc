@@ -2,6 +2,9 @@ set encoding=utf-8
 
 " Leader
 let mapleader = " "
+set ttyfast       " Indicate fast terminal conn for faster redraw
+set ttymouse=xterm2 " Indicate terminal type for mouse codes
+set ttyscroll=3   " Speedup scrolling
 set tabstop=2     " 1 tab = 2 spaces
 set shiftwidth=2  " text is indented 2 columns with re-indent operations
 set softtabstop=2 " 1 tab = 2 spaces (insert mode)
@@ -11,10 +14,13 @@ set hlsearch      " Highlight search results
 set incsearch     " Show search results as I type
 set nojoinspaces  " Only one space after .
 set background=dark
-set ic            " Ignore case
+set ignorecase    " Search case insensitive...
+set smartcase     " ... but not it begins with upper case
 set nowrap
 set laststatus=2  " Always display the status line
+set autoread      " Automatically read changed files
 set autowrite     " Automatically :write before running commands
+set showcmd       " Show me what I'm typing
 set nobackup
 set nowritebackup
 set noswapfile
@@ -86,8 +92,24 @@ augroup markdownSpell
 augroup END
 
 " vim-go
+let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
-" run :GoBuild or :GoTestCompile based on the go file
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
+augroup go
+  autocmd!
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+augroup END
+
+" build_go_files is a custom function that builds or compiles the test file.
+" It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
 function! s:build_go_files()
   let l:file = expand('%')
   if l:file =~# '^\f\+_test\.go$'
@@ -96,11 +118,6 @@ function! s:build_go_files()
     call go#cmd#Build(0)
   endif
 endfunction
-augroup GoLang
-  autocmd!
-  autocmd FileType go nmap <leader>r <Plug>(go-run)
-  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-augroup END
 
 
 " -----------------------------
