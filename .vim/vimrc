@@ -86,6 +86,7 @@ augroup markdownSpell
 augroup END
 
 " vim-go
+let g:go_list_type = "quickfix"
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file = expand('%')
@@ -185,8 +186,8 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind S to grep word under cursor
+nnoremap S :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " This unsets the "last search pattern" register by hitting return 
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
