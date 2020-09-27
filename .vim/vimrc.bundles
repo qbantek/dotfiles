@@ -15,7 +15,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'sodapopcan/vim-rubocop'
 
 " JavaScript-related plugins
-Plugin 'elzr/vim-json'
+Plugin 'elzr/vim-json'    " json syntax higlighting
 Plugin 'jelera/vim-javascript-syntax'
 
 " Go
