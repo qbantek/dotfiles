@@ -55,18 +55,22 @@ endif
 " Command-T
 map <Leader>e <Plug>(CommandT)
 
-
-" vim-rspec mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-" this tells vim-rspec to use Send_to_Tmux to run the selected specs.
+" vim-rspec
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+augroup rspec
+  autocmd!
+  autocmd FileType ruby map <Leader>t :call RunCurrentSpecFile()<CR>
+  autocmd FileType ruby map <Leader>s :call RunNearestSpec()<CR>
+  autocmd FileType ruby map <Leader>l :call RunLastSpec()<CR>
+  autocmd FileType ruby map <Leader>a :call RunAllSpecs()<CR>
+augroup END
 
 " vim-rubocop
 let g:vimrubocop_keymap = 0
-nmap <Leader>ra :RuboCop -a<CR>
+augroup rubocop
+  autocmd!
+  autocmd FileType ruby map <Leader>ra :RuboCop -a<CR>
+augroup END
 
 " YouCompleteMe
 let g:ycm_clangd_binary_path = "/usr/lib/llvm-10/bin/clangd"
