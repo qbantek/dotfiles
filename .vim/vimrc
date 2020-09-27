@@ -2,7 +2,6 @@ set encoding=utf-8
 
 " Leader
 let mapleader = " "
-
 set tabstop=2     " 1 tab = 2 spaces
 set shiftwidth=2  " text is indented 2 columns with re-indent operations
 set softtabstop=2 " 1 tab = 2 spaces (insert mode)
@@ -23,74 +22,41 @@ set modelines=0   " Disable modelines as a security precaution
 set nomodeline    " Disable modelines as a security precaution
 set number
 set relativenumber
-
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
-
 set ruler
 set textwidth=80 " Make it obvious where 80 characters is
 set colorcolumn=+1
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
-
 syntax enable
 syntax on
+
+
+" -----------------------------
+"         PLUGINS
+" -----------------------------
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-if has("clipboard")
-  " CTRL-X is Cut
-  vnoremap <C-X> "+x
-
-  " CTRL-C is Copy
-  vnoremap <C-C> "+y
-
-  " CTRL-V is Paste
-  map <C-V> "+gP
-  cmap <C-V> <C-R>+
-endif
-
-" Automatically set paste mode when pasting in insert mode
-function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
-endfunction
-
-function! WrapForTmux(s)
-  if !exists('$TMUX')
-    return a:s
-  endif
-
-  let tmux_start = "\<Esc>Ptmux;"
-  let tmux_end = "\<Esc>\\"
-
-  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-endfunction
-
-let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-let &t_EI .= WrapForTmux("\<Esc>[?2004l")
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
 " Command-T
 map <Leader>e <Plug>(CommandT)
 
-" this tells vim-rspec to use Send_to_Tmux to run the selected specs.
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 " vim-rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+" this tells vim-rspec to use Send_to_Tmux to run the selected specs.
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 " vim-rubocop
 let g:vimrubocop_keymap = 0
@@ -106,40 +72,18 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
-" This unsets the "last search pattern" register by hitting return 
-:nnoremap <silent> <CR> :nohlsearch<CR><CR
-
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-" Map jk & kj to Esc
-:inoremap jk <Esc>
-:inoremap kj <Esc>
-
-" Support for gem ctags
-set tags=tags;
-set tags+=gems.tags;
-
-" Disable arrow movement, re-size splits instead.
-nnoremap <Up>    :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Left>  :vertical resize +2<CR>
-nnoremap <Right> :vertical resize -2<CR>
-
-" markdown preview
+" vim-markdown-preview
+let vim_markdown_preview_toggle=1
 let vim_markdown_preview_github=1
+let vim_markdown_preview_hotkey='<C-m>'
 augroup markdownSpell
   autocmd!
-  autocmd FileType markdown nmap <leader>m :!open -a "Marked 2" "%"<cr><cr>
   autocmd FileType markdown setlocal spell spelllang=en_us
   autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
 augroup END
-
-" Correct last spelling issue
-nmap <Leader>z [s1z=
-
-" Toggle spell checking
-map <leader>ss :setlocal spell!<cr>
 
 " vim-go
 " run :GoBuild or :GoTestCompile based on the go file
@@ -151,12 +95,80 @@ function! s:build_go_files()
     call go#cmd#Build(0)
   endif
 endfunction
-
 augroup GoLang
   autocmd!
   autocmd FileType go nmap <leader>r <Plug>(go-run)
   autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 augroup END
+
+
+" -----------------------------
+"         MOVEMENT
+" -----------------------------
+
+" Map jk & kj to Esc
+:inoremap jk <Esc>
+:inoremap kj <Esc>
+
+" Disable arrow movement, re-size splits instead.
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
+
+
+" -----------------------------
+"         COPY/PASTE
+" -----------------------------
+
+if has("clipboard")
+  " CTRL-X is Cut
+  vnoremap <C-X> "+x
+  " CTRL-C is Copy
+  vnoremap <C-C> "+y
+  " CTRL-V is Paste
+  map <C-V> "+gP
+  cmap <C-V> <C-R>+
+endif
+
+" Automatically set paste mode when pasting in insert mode
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+
+" -----------------------------
+"         SPELLING
+" -----------------------------
+
+" Correct last spelling issue
+nmap <Leader>z [s1z=
+" Toggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+
+" -----------------------------
+"         SEARCHING
+" -----------------------------
+
+" Support for gem ctags
+set tags=tags;
+set tags+=gems.tags;
 
 " Ignore when expanding wildcards
 set wildignore=*/node_modules/*,*/tmp/*,*/.idea/*,*/.git/*
@@ -176,7 +188,5 @@ endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" vim-markdown-preview
-let vim_markdown_preview_toggle=1
-let vim_markdown_preview_github=1
-let vim_markdown_preview_hotkey='<C-m>'
+" This unsets the "last search pattern" register by hitting return 
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
