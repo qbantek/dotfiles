@@ -8,7 +8,6 @@ set shiftwidth=2  " text is indented 2 columns with re-indent operations
 set softtabstop=2 " 1 tab = 2 spaces (insert mode)
 set smarttab      " Uses shiftwidth instead of tabstop at start of lines
 set expandtab     " Replaces tab with spaces
-
 set hlsearch      " Highlight search results
 set incsearch     " Show search results as I type
 set nojoinspaces  " Only one space after .
@@ -16,22 +15,15 @@ set background=dark
 set ic            " Ignore case
 set nowrap
 set laststatus=2  " Always display the status line
-
 set autowrite     " Automatically :write before running commands
 set nobackup
 set nowritebackup
 set noswapfile
-
-augroup markdownSpell
-  autocmd!
-  autocmd FileType markdown setlocal spell spelllang=en_us
-  autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
-augroup END
 set modelines=0   " Disable modelines as a security precaution
 set nomodeline    " Disable modelines as a security precaution
-
 set number
 set relativenumber
+
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
@@ -66,6 +58,28 @@ if has("clipboard")
   cmap <C-V> <C-R>+
 endif
 
+" Automatically set paste mode when pasting in insert mode
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
 " Command-T
 map <Leader>e <Plug>(CommandT)
 
@@ -89,8 +103,8 @@ let g:ycm_key_list_previous_completion = ['<C-k>']
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " This unsets the "last search pattern" register by hitting return 
 :nnoremap <silent> <CR> :nohlsearch<CR><CR
@@ -112,14 +126,13 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 
-" map markdown preview
-nmap <leader>m :!open -a "Marked 2" "%"<cr><cr>
+" markdown preview
 let vim_markdown_preview_github=1
-
 augroup markdownSpell
   autocmd!
-  autocmd FileType markdown setlocal spell
-  autocmd BufRead,BufNewFile *.md setlocal spell
+  autocmd FileType markdown nmap <leader>m :!open -a "Marked 2" "%"<cr><cr>
+  autocmd FileType markdown setlocal spell spelllang=en_us
+  autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
 augroup END
 
 " Correct last spelling issue
@@ -129,9 +142,6 @@ nmap <Leader>z [s1z=
 map <leader>ss :setlocal spell!<cr>
 
 " vim-go
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file = expand('%')
@@ -142,7 +152,11 @@ function! s:build_go_files()
   endif
 endfunction
 
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+augroup GoLang
+  autocmd!
+  autocmd FileType go nmap <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+augroup END
 
 " Ignore when expanding wildcards
 set wildignore=*/node_modules/*,*/tmp/*,*/.idea/*,*/.git/*
