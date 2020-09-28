@@ -13,7 +13,6 @@ set expandtab     " Replaces tab with spaces
 set hlsearch      " Highlight search results
 set incsearch     " Show search results as I type
 set nojoinspaces  " Only one space after .
-set background=dark
 set ignorecase    " Search case insensitive...
 set smartcase     " ... but not it begins with upper case
 set nowrap
@@ -51,6 +50,14 @@ syntax on
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
+
+" Color scheme
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+colorscheme solarized
 
 " Command-T
 map <Leader>e <Plug>(CommandT)
