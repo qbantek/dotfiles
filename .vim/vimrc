@@ -76,6 +76,8 @@ augroup END
 let g:ycm_clangd_binary_path = "/usr/lib/llvm-10/bin/clangd"
 let g:ycm_key_list_select_completion = ['<C-j>']
 let g:ycm_key_list_previous_completion = ['<C-k>']
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -84,6 +86,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " vim-markdown-preview
 let vim_markdown_preview_toggle=1
@@ -109,6 +112,7 @@ augroup go
   autocmd!
   autocmd FileType go nmap <leader>r  <Plug>(go-run)
   autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  autocmd FileType go nmap <leader>c  <Plug>(go-coverage-toggle)
   autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 augroup END
 
