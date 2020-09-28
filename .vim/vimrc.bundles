@@ -22,6 +22,7 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'fatih/vim-go'
 
 " Auto completion
+Plugin 'ervandew/supertab'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
