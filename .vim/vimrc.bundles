@@ -41,6 +41,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'wincent/command-t'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'wakatime/vim-wakatime'
+
+" Colorscheme
+Plugin 'altercation/vim-colors-solarized'
+
 call vundle#end()
 
 filetype plugin indent on    " required
