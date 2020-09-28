@@ -20,6 +20,7 @@ set laststatus=2  " Always display the status line
 set autoread      " Automatically read changed files
 set autowrite     " Automatically :write before running commands
 set showcmd       " Show me what I'm typing
+set backspace=indent,eol,start
 set nobackup
 set nowritebackup
 set noswapfile
