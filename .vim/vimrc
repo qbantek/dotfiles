@@ -136,6 +136,13 @@ function! s:build_go_files()
   endif
 endfunction
 
+" undotree
+if has("persistent_undo")
+  silent !mkdir ~/.vim > /dev/null 2>&1
+  silent !mkdir ~/.vim/undo > /dev/null 2>&1
+  set undodir=$HOME/.vim/undo
+  set undofile
+endif
 
 " -----------------------------
 "         MOVEMENT

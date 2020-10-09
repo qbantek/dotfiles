@@ -39,6 +39,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
 Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'mbbill/undotree'
 Plugin 'wakatime/vim-wakatime'
 
 " Colorscheme
