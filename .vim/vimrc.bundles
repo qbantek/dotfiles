@@ -38,7 +38,6 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'scrooloose/nerdtree'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'kien/ctrlp.vim'
-Plugin 'wincent/command-t'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'wakatime/vim-wakatime'
 

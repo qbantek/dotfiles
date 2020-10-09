@@ -60,9 +60,6 @@ else
 endif
 colorscheme solarized
 
-" Command-T
-map <Leader>e <Plug>(CommandT)
-
 " vim-rspec
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 augroup rspec
