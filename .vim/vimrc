@@ -42,6 +42,13 @@ set splitbelow
 set splitright
 syntax enable
 syntax on
+" config persistent undo
+if has("persistent_undo")
+  silent !mkdir ~/.vim > /dev/null 2>&1
+  silent !mkdir ~/.vim/undo > /dev/null 2>&1
+  set undodir=$HOME/.vim/undo
+  set undofile
+endif
 
 
 " -----------------------------
@@ -137,12 +144,9 @@ function! s:build_go_files()
 endfunction
 
 " undotree
-if has("persistent_undo")
-  silent !mkdir ~/.vim > /dev/null 2>&1
-  silent !mkdir ~/.vim/undo > /dev/null 2>&1
-  set undodir=$HOME/.vim/undo
-  set undofile
-endif
+nnoremap <leader>u :UndotreeToggle<CR>
+let g:gundo_prefer_python3 = 1
+
 
 " -----------------------------
 "         MOVEMENT
