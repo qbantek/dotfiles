@@ -27,6 +27,10 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+" Search
+Plugin 'kien/ctrlp.vim'
+Plugin 'rking/ag.vim'
+
 " Other
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-fugitive'
@@ -37,7 +41,6 @@ Plugin 'L9'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'scrooloose/nerdtree'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'kien/ctrlp.vim'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'mbbill/undotree'
 Plugin 'wakatime/vim-wakatime'
