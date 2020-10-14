@@ -68,7 +68,7 @@ endif
 colorscheme solarized
 
 " vim-rspec
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+let g:rspec_command = "Dispatch rspec {spec}"
 augroup rspec
   autocmd!
   autocmd FileType ruby map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -161,6 +161,9 @@ nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
+
+" disable tmux navigation when zoomed in
+let g:tmux_navigator_disable_when_zoomed = 1
 
 
 " -----------------------------
