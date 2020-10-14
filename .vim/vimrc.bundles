@@ -13,6 +13,7 @@ Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-endwise' " adds end after if, do, def and other keywords
 Plugin 'tpope/vim-rails'
 Plugin 'sodapopcan/vim-rubocop'
+Plugin 'vim-ruby/vim-ruby'  " ruby syntax highlighting, indentation, etc
 
 " JavaScript-related plugins
 Plugin 'elzr/vim-json'    " json syntax higlighting
