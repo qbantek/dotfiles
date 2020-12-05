@@ -1,7 +1,7 @@
---skip-active-record
---skip-test-unit
+--skip-test
 --skip-system-test
 --skip-turbolinks
---skip-keeps
---skip-coffee
 --skip-action-cable
+--skip-action-mailbox
+--skip-action-text
+--skip-active-storage
