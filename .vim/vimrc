@@ -103,11 +103,8 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
-augroup NERDTree
-  autocmd!
-  autocmd BufEnter NERD_tree_* nmap  d<CR> <CR> :NERDTreeToggle <CR>
-  autocmd BufLeave NERD_tree_* unmap d<CR>
-augroup END  
+let NERDTreeQuitOnOpen=1
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$'] 
 
 " vim-markdown-preview
 let vim_markdown_preview_toggle=1
