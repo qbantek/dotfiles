@@ -239,3 +239,11 @@ nnoremap S :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " This unsets the "last search pattern" register by hitting return 
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+" -----------------------------
+"         COMMIT MESSAGES
+" -----------------------------
+augroup gitcommit
+  autocmd!
+  autocmd Filetype gitcommit setlocal spell textwidth=72
+augroup END
