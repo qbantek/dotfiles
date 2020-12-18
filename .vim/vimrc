@@ -67,6 +67,11 @@ else
 endif
 colorscheme solarized
 
+" Dockerfile syntax
+augroup dockerfile
+  autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
+augroup END
+
 " vim-rspec
 let g:rspec_command = "Dispatch rspec {spec}"
 augroup rspec
