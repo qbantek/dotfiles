@@ -33,3 +33,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 function cheat(){
   curl cht.sh/$1
 }
+
+# go-path
+alias cdgo='cd ~/go/src/github.com/'
