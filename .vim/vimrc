@@ -137,6 +137,10 @@ augroup go
   autocmd FileType go nmap <leader>t  <Plug>(go-test)
   autocmd FileType go nmap <leader>c  <Plug>(go-coverage-toggle)
   autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+  autocmd Filetype go
+        \  command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+        \| command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+        \| command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
 
 " build_go_files is a custom function that builds or compiles the test file.
