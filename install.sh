@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 { # This ensures the entire script is downloaded.
 
 set -eo pipefail
@@ -60,9 +60,9 @@ cd "$basedir"
 
 echo "Creating symlinks..."
 echo " --bash"
-symlink "$basedir/bash_profile" "$HOME/.bash_profile"
-symlink "$basedir/bashrc" "$HOME/.bashrc"
-symlink "$basedir/bash_aliases" "$HOME/.bash_aliases"
+# symlink "$basedir/bash_profile" "$HOME/.bash_profile"
+# symlink "$basedir/bashrc" "$HOME/.bashrc"
+# symlink "$basedir/bash_aliases" "$HOME/.bash_aliases"
 
 echo " --rails"
 symlink "$basedir/railsrc" "$HOME/.railsrc"
