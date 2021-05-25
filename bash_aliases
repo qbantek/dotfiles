@@ -36,3 +36,4 @@ function cheat(){
 
 # go-path
 alias cdgo='cd ~/go/src/github.com/'
+ctags=/usr/local/bin/ctags
