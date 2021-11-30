@@ -36,3 +36,9 @@ function cheat(){
 
 # go-path
 alias cdgo='cd ~/go/src/github.com/'
+
+# start a vpn session to my work network
+alias acdvpn='openvpn3 session-start --config acd'
+
+# pull changes in all subdirectories
+alias gm='for i in */.git; do ( echo $i; cd $i/..; git morning; git d; ); done'
