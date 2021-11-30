@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 { # This ensures the entire script is downloaded.
 
 set -eo pipefail

@@ -42,3 +42,6 @@ alias acdvpn='openvpn3 session-start --config acd'
 
 # pull changes in all subdirectories
 alias gm='for i in */.git; do ( echo $i; cd $i/..; git morning; git d; ); done'
+
+# ctags
+ctags=/usr/local/bin/ctags

@@ -5,3 +5,9 @@
 
 # JetBrains
 .idea/
+
+# mac
+.DS_Store
+
+# vscode
+.vscode
