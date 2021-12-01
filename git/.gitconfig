@@ -1,0 +1,18 @@
+[user]
+	name = Erich N Quintero
+	email = qbantek@gmail.com
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = nvim
+[pull]
+	ff = only
+[init]
+	defaultBranch = master
+[alias]
+	all = "!f() { ls -R -d */.git | xargs -I{} bash -c \"echo {} && git -C {}/../ $1\"; }; f"
+	d = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d"
+	D = "!git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
+	hotspot = "!git log --format=format: --name-only | egrep -v '^$' | sort | uniq -c | sort -rg | head -10"
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
+	morning = "!git checkout master; git pull; git checkout develop; git pull"
+	nuke = "!git reset --hard; git clean -fd"

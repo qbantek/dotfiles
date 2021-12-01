@@ -1,83 +1,40 @@
-#!/bin/sh
-{ # This ensures the entire script is downloaded.
+# install nix
+curl -L https://nixos.org/nix/install | sh
 
-set -eo pipefail
+# source nix
+. ~/.nix-profile/etc/profile.d/nix.sh
 
-basedir="$HOME/projects/dotfiles"
-vundledir="$HOME/.vim/bundle/Vundle.vim"
-repourl="git@github.com:qbantek/dotfiles.git"
-vundleurl="git@github.com:VundleVim/Vundle.vim.git"
+# install packages
+nix-env -iA \
+	nixpkgs.zsh \
+	nixpkgs.antibody \
+	nixpkgs.git \
+	nixpkgs.neovim \
+	nixpkgs.tmux \
+	nixpkgs.stow \
+	nixpkgs.yarn \
+	nixpkgs.fzf \
+	nixpkgs.ripgrep \
+	nixpkgs.gnumake \
+	nixpkgs.gcc \
+	nixpkgs.direnv
 
-function symlink() {
-  src="$1"
-  dest="$2"
+# stow dotfiles
+stow git
+stow nvim
+stow rails
+stow rvm
+stow tmux
+stow zsh
 
-  if [ -e "$dest" ]; then
-    if [ -L "$dest" ]; then
-      if [ ! -e "$dest" ]; then
-        echo "Removing broken symlink at $dest"
-        rm "$dest"
-      else
-        # Already symlinked -- I'll assume correctly.
-        return 0
-      fi
-    else
-      # Rename files with a ".old" extension.
-      echo "$dest already exists, renaming to $dest.old"
-      backup="$dest.old"
-      if [ -e "$backup" ]; then
-        echo "Error: "$backup" already exists. Please delete or rename it."
-        exit 1
-      fi
-      mv -v "$dest" "$backup"
-    fi
-  fi
-  ln -sf "$src" "$dest"
-}
+# add zsh as a login shell
+command -v zsh | sudo tee -a /etc/shells
 
+# use zsh as default shell
+sudo chsh -s $(which zsh) $USER
 
-if [ -d "$basedir/.git" ]; then
-  echo "Updating dotfiles using existing git..."
-  cd "$basedir"
-  git pull --quiet --rebase origin master || exit 1
-else
-  echo "Checking out dotfiles using git..."
-  rm -rf "$basedir"
-  git clone --quiet --depth=1 "$repourl" "$basedir"
-fi
+# bundle zsh plugins 
+antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
 
-if [ -d "$vundledir/.git" ]; then
-  echo "Updating Vundle using existing git..."
-  cd "$vundledir"
-  git pull --quiet --rebase origin master || exit 1
-else
-  echo "Checking out Vundle using git..."
-  rm -rf "$vundledir"
-  git clone --quiet --depth=1 "$vundleurl" "$vundledir"
-fi
-
-cd "$basedir"
-
-echo "Creating symlinks..."
-echo " --bash"
-symlink "$basedir/bash_profile" "$HOME/.bash_profile"
-symlink "$basedir/bashrc" "$HOME/.bashrc"
-symlink "$basedir/bash_aliases" "$HOME/.bash_aliases"
-
-echo " --rails"
-symlink "$basedir/railsrc" "$HOME/.railsrc"
-
-echo " --vim"
-symlink "$basedir/.vim/vimrc" "$HOME/.vimrc"
-symlink "$basedir/.vim/vimrc.bundles" "$HOME/.vimrc.bundles"
-
-echo " --git"
-symlink "$basedir/gitattribute" "$HOME/.gitattributes"
-symlink "$basedir/gitignore" "$HOME/.gitignore"
-
-echo " --tmux"
-symlink "$basedir/tmux.conf" "$HOME/.tmux.conf"
-
-echo "Done."
-
-} # This ensures the entire script is downloaded.
+# install neovim plugins
+nvim --headless +PlugInstall +qall
