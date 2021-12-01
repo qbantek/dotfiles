@@ -1,83 +1,33 @@
-#!/bin/sh
-{ # This ensures the entire script is downloaded.
+# Install general packages
+# sudo apt update -y
+# sudo apt install -y curl git python-dev python-pip python3-dev python3-pip
 
-set -eo pipefail
+# Install oh-my-zsh
+# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-basedir="$HOME/projects/dotfiles"
-vundledir="$HOME/.vim/bundle/Vundle.vim"
-repourl="git@github.com:qbantek/dotfiles.git"
-vundleurl="git@github.com:VundleVim/Vundle.vim.git"
+# Install powerlevel10k theme
+# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-function symlink() {
-  src="$1"
-  dest="$2"
+# Set theme in .zshrc
+# echo 'source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
-  if [ -e "$dest" ]; then
-    if [ -L "$dest" ]; then
-      if [ ! -e "$dest" ]; then
-        echo "Removing broken symlink at $dest"
-        rm "$dest"
-      else
-        # Already symlinked -- I'll assume correctly.
-        return 0
-      fi
-    else
-      # Rename files with a ".old" extension.
-      echo "$dest already exists, renaming to $dest.old"
-      backup="$dest.old"
-      if [ -e "$backup" ]; then
-        echo "Error: "$backup" already exists. Please delete or rename it."
-        exit 1
-      fi
-      mv -v "$dest" "$backup"
-    fi
-  fi
-  ln -sf "$src" "$dest"
-}
+echo "-----------------------------------------------------------------"
+echo "Download and install Meslo fonts!"
+echo "https://github.com/romkatv/powerlevel10k#manual-font-installation"
+echo "-----------------------------------------------------------------"
 
+# Install docker
+# sudo apt install -y apt-transport-https ca-certificates software-properties-common
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+# sudo apt update -y
+# apt-cache policy docker-ce
+# sudo apt install docker-ce
 
-if [ -d "$basedir/.git" ]; then
-  echo "Updating dotfiles using existing git..."
-  cd "$basedir"
-  git pull --quiet --rebase origin master || exit 1
-else
-  echo "Checking out dotfiles using git..."
-  rm -rf "$basedir"
-  git clone --quiet --depth=1 "$repourl" "$basedir"
-fi
+# Install neovim
+# sudo add-apt-repository ppa:neovim-ppa/unstable -y
+# sudo apt update -y
+# sudo apt install -y neovim
 
-if [ -d "$vundledir/.git" ]; then
-  echo "Updating Vundle using existing git..."
-  cd "$vundledir"
-  git pull --quiet --rebase origin master || exit 1
-else
-  echo "Checking out Vundle using git..."
-  rm -rf "$vundledir"
-  git clone --quiet --depth=1 "$vundleurl" "$vundledir"
-fi
-
-cd "$basedir"
-
-echo "Creating symlinks..."
-echo " --bash"
-symlink "$basedir/bash_profile" "$HOME/.bash_profile"
-symlink "$basedir/bashrc" "$HOME/.bashrc"
-symlink "$basedir/bash_aliases" "$HOME/.bash_aliases"
-
-echo " --rails"
-symlink "$basedir/railsrc" "$HOME/.railsrc"
-
-echo " --vim"
-symlink "$basedir/.vim/vimrc" "$HOME/.vimrc"
-symlink "$basedir/.vim/vimrc.bundles" "$HOME/.vimrc.bundles"
-
-echo " --git"
-symlink "$basedir/gitattribute" "$HOME/.gitattributes"
-symlink "$basedir/gitignore" "$HOME/.gitignore"
-
-echo " --tmux"
-symlink "$basedir/tmux.conf" "$HOME/.tmux.conf"
-
-echo "Done."
-
-} # This ensures the entire script is downloaded.
+# cleanup
+sudo apt autoremove -y
