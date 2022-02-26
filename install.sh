@@ -1,83 +1,50 @@
-#!/bin/sh
-{ # This ensures the entire script is downloaded.
+# install brew
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-set -eo pipefail
+# disable analytics
+brew analytics off
 
-basedir="$HOME/projects/dotfiles"
-vundledir="$HOME/.vim/bundle/Vundle.vim"
-repourl="git@github.com:qbantek/dotfiles.git"
-vundleurl="git@github.com:VundleVim/Vundle.vim.git"
+# install iTerm2
+#brew install iterm2
 
-function symlink() {
-  src="$1"
-  dest="$2"
+# install git
+#brew install git
 
-  if [ -e "$dest" ]; then
-    if [ -L "$dest" ]; then
-      if [ ! -e "$dest" ]; then
-        echo "Removing broken symlink at $dest"
-        rm "$dest"
-      else
-        # Already symlinked -- I'll assume correctly.
-        return 0
-      fi
-    else
-      # Rename files with a ".old" extension.
-      echo "$dest already exists, renaming to $dest.old"
-      backup="$dest.old"
-      if [ -e "$backup" ]; then
-        echo "Error: "$backup" already exists. Please delete or rename it."
-        exit 1
-      fi
-      mv -v "$dest" "$backup"
-    fi
-  fi
-  ln -sf "$src" "$dest"
-}
+# install nvm 0.39.1 and latest lts node
+#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+#nvm install --lts
 
+# have brew manage zsh installation
+#brew install zsh
 
-if [ -d "$basedir/.git" ]; then
-  echo "Updating dotfiles using existing git..."
-  cd "$basedir"
-  git pull --quiet --rebase origin master || exit 1
-else
-  echo "Checking out dotfiles using git..."
-  rm -rf "$basedir"
-  git clone --quiet --depth=1 "$repourl" "$basedir"
-fi
+# install oh-my-zsh
+#sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-if [ -d "$vundledir/.git" ]; then
-  echo "Updating Vundle using existing git..."
-  cd "$vundledir"
-  git pull --quiet --rebase origin master || exit 1
-else
-  echo "Checking out Vundle using git..."
-  rm -rf "$vundledir"
-  git clone --quiet --depth=1 "$vundleurl" "$vundledir"
-fi
+# powerlevel10k theme
+#git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+#	${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+#echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >>~/.zshrc
 
-cd "$basedir"
+# zsh-syntax-highlighting plugin
+#brew install zsh-syntax-highlighting
 
-echo "Creating symlinks..."
-echo " --bash"
-symlink "$basedir/bash_profile" "$HOME/.bash_profile"
-symlink "$basedir/bashrc" "$HOME/.bashrc"
-symlink "$basedir/bash_aliases" "$HOME/.bash_aliases"
+# stow
+#brew install stow
 
-echo " --rails"
-symlink "$basedir/railsrc" "$HOME/.railsrc"
+# bat
+#brew install bat
 
-echo " --vim"
-symlink "$basedir/.vim/vimrc" "$HOME/.vimrc"
-symlink "$basedir/.vim/vimrc.bundles" "$HOME/.vimrc.bundles"
+# neovim
+#brew install neovim --HEAD
 
-echo " --git"
-symlink "$basedir/gitattribute" "$HOME/.gitattributes"
-symlink "$basedir/gitignore" "$HOME/.gitignore"
+sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-echo " --tmux"
-symlink "$basedir/tmux.conf" "$HOME/.tmux.conf"
+# vscode
+#brew install --cask visual-studio-code
 
-echo "Done."
-
-} # This ensures the entire script is downloaded.
+# docker
+#brew install --cask docker
