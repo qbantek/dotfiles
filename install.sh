@@ -31,9 +31,6 @@ echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >>~/.zshrc
 # zsh-syntax-highlighting plugin
 brew install zsh-syntax-highlighting
 
-# stow
-brew install stow
-
 # bat
 brew install bat
 
@@ -48,3 +45,9 @@ brew install --cask visual-studio-code
 
 # docker
 brew install --cask docker
+
+# stow
+brew install stow
+stow git
+stow nvim
+stow zsh
