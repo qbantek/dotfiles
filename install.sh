@@ -10,13 +10,6 @@ brew install iterm2
 # install git
 brew install git
 
-# install nvm 0.39.1 and latest lts node
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-nvm install --lts
-
 # have brew manage zsh installation
 brew install zsh
 
@@ -34,6 +27,12 @@ echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >>~/.zshrc
 # zsh-syntax-highlighting plugin
 brew install zsh-syntax-highlighting
 
+# tmux
+brew install tmux
+
+# tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # neovim
 brew install neovim --HEAD
 sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
@@ -45,6 +44,13 @@ brew install --cask visual-studio-code
 # docker
 brew install --cask docker
 
+# install nvm 0.39.1 and latest lts node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+nvm install --lts
+
 # rvm
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
@@ -53,10 +59,13 @@ echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg2 --import-ownertrust # pi
 \curl -sSL https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 
+# go
+brew install golang
+
 # stow
 brew install stow
+stow gem
 stow git
 stow nvim
-stow zsh
 stow rvm
-stow gem
+stow zsh
