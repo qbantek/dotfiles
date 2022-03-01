@@ -51,8 +51,8 @@ highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 "
 call plug#begin('~/.config/nvim/plugged')
 
-" Colorscheme
 Plug 'lifepillar/vim-solarized8'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
