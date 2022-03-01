@@ -1,0 +1,8 @@
+[user]
+	name = Erich N Quintero
+	email = qbantek@gmail.com
+	signingkey = 6F8EA5BBAEEA41D1
+[init]
+	defaultBranch = master
+[commit]
+	gpgsign = true
