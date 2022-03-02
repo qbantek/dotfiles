@@ -1,6 +1,7 @@
 "-- General
 "
-let mapleader = " "
+let mapleader=" "
+
 set syntax=on
 set encoding=UTF-8
 set confirm
@@ -50,12 +51,17 @@ highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 "-- Plugins
 "
 call plug#begin('~/.config/nvim/plugged')
-
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lifepillar/vim-solarized8'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'preservim/nerdtree'
-
 call plug#end()
+
+lua require('qbantek')
+
 
 "-- COLORS
 "
@@ -79,6 +85,12 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 "-- SEARCHING
 "
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
 set tags=tags;
 set tags+=gems.tags; " Support for gem ctags
 
