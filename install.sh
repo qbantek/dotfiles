@@ -1,20 +1,16 @@
 # install brew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# disable analytics
 brew analytics off
 
-# install iTerm2
 brew install iterm2
-
-# install git
 brew install git
-
-# have brew manage zsh installation
+brew install bat # cooler cat
+brew install ripgrep
+brew install golang
+brew install --cask visual-studio-code
+brew install --cask docker
 brew install zsh
-
-# bat
-brew install bat
+brew install zsh-syntax-highlighting
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -24,27 +20,15 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 	${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >>~/.zshrc
 
-# zsh-syntax-highlighting plugin
-brew install zsh-syntax-highlighting
-
-# tmux
 brew install tmux
-
 # tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# neovim
 brew install neovim --HEAD
 sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-# vscode
-brew install --cask visual-studio-code
-
-# docker
-brew install --cask docker
-
-# install nvm 0.39.1 and latest lts node
+# nvm 0.39.1 and latest lts node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -58,9 +42,6 @@ echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg2 --import-ownertrust # mp
 echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg2 --import-ownertrust # piotr.kuczynski@gmail.com
 \curl -sSL https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
-
-# go
-brew install golang
 
 # stow
 brew install stow

@@ -51,18 +51,19 @@ highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 "
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'lifepillar/vim-solarized8'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'lifepillar/vim-solarized8'
+Plug 'preservim/nerdtree'
 
 call plug#end()
 
-"-- Colors
+"-- COLORS
 "
 set background=dark
 set termguicolors
 colorscheme solarized8
 
-"-- Movement
+"-- MOVEMENT
 "
 :inoremap jk <Esc> " Map jk
 :inoremap kj <Esc> "    & kj to Esc
@@ -86,6 +87,13 @@ set wildignore=*/node_modules/*,*/tmp/*,*/.idea/*,*/.git/*
 
 " This unsets the "last search pattern" register by hitting return 
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+" Map Ctrl-n to NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
 
 "-- COMMIT MESSAGES
 "
