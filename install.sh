@@ -4,6 +4,7 @@ brew analytics off
 
 brew install iterm2
 brew install git
+brew install tree # directory structure as a 'tree'
 brew install bat # cooler cat
 brew install ripgrep
 brew install golang
