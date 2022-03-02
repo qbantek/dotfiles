@@ -7,6 +7,7 @@ brew install git
 brew install tree # directory structure as a 'tree'
 brew install bat # cooler cat
 brew install ripgrep
+brew install fd # simple, fast and user-friendly alternative to find
 brew install golang
 brew install --cask visual-studio-code
 brew install --cask docker
