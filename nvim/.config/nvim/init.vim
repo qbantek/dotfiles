@@ -101,6 +101,10 @@ set wildignore=*/node_modules/*,*/tmp/*,*/.idea/*,*/.git/*
 " This unsets the "last search pattern" register by hitting return 
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
+" Scroll the screen and do not move the cursor when jumping to next result
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Map Ctrl-n to NERDTree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
