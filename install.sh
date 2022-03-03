@@ -9,6 +9,8 @@ brew install bat # cooler cat
 brew install ripgrep
 brew install fd # simple, fast and user-friendly alternative to find
 brew install golang
+brew install python
+python3 -m pip install --upgrade pip
 brew install --cask visual-studio-code
 brew install --cask docker
 brew install zsh
@@ -26,9 +28,11 @@ brew install tmux
 # tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+# neovim
 brew install neovim --HEAD
 sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+python3 -m pip install --user --upgrade pynvim
 
 # nvm 0.39.1 and latest lts node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -36,6 +40,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 nvm install --lts
+npm install --global yarn
 
 # rvm
 curl -sSL https://rvm.io/mpapis.asc | gpg --import -
