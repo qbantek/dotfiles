@@ -39,6 +39,11 @@ if has("persistent_undo")
   set undodir=~/.config/nvim/undodir
   set undofile
 endif
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/android/*
+set wildignore+=**/ios/*
+set wildignore+=**/.git/*
 set splitbelow
 set splitright
 set hidden
@@ -53,6 +58,7 @@ highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 call plug#begin('~/.config/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lifepillar/vim-solarized8'
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -68,6 +74,7 @@ lua require('qbantek')
 set background=dark
 set termguicolors
 colorscheme solarized8
+au TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false}
 
 "-- MOVEMENT
 "
@@ -85,12 +92,6 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 "-- SEARCHING
 "
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
 set tags=tags;
 set tags+=gems.tags; " Support for gem ctags
 
