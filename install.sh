@@ -1,17 +1,16 @@
 #!/bin/sh
+
 { # This ensures the entire script is downloaded.
 set -eo pipefail
 
 # brew & tools
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew analytics off
-brew install iterm2
-brew install tree # directory structure as a 'tree'
-brew install bat  # cooler cat
-brew install ripgrep
-brew install fd   # simple, fast and user-friendly alternative to find
-brew install --cask visual-studio-code
-brew install --cask docker
+brew update
+brew install gnupg  # make sure we have gpg available
+
+# ToDo: add MacOS specific settings
+# mac
 
 # git
 brew install git
@@ -116,6 +115,17 @@ brew install neovim --HEAD
 sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   python3 -m pip install --user --upgrade pynvim
+
+# tools
+brew install iterm2
+brew install tree # directory structure as a 'tree'
+brew install bat  # cooler cat
+brew install ripgrep
+brew install fd   # simple, fast and user-friendly alternative to find
+brew install --cask visual-studio-code
+brew install --cask docker
+brew install --cask google-chrome
+brew install --cask postman
 
 # stow
 brew install stow
