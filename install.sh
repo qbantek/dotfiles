@@ -16,17 +16,60 @@ brew install --cask docker
 # git
 brew install git
 
+# username
+gitname=`git config --global user.name`
+if [ -z "$gitname" ]; then
+	gitname="Erich N Quintero"
+fi
+read -p "Enter git committer name (return to use '$gitname'): " -e newgitname
+if [ -z "$newgitname" ]; then
+	newgitname=$gitname
+fi
+`git config --global user.name "$newgitname"`
+
+# email
+gitemail=`git config --global user.email`
+if [ -z "$gitemail" ]; then
+	gitemail="qbantek@gmail.com"
+fi
+read -p "Enter git committer email (return to use '$gitemail'): " -e newgitemail
+if [ -z "$newgitemail" ]; then
+	newgitemail=$gitemail
+fi
+`git config --global user.email "$newgitemail"`
+
+
+# GitHub
+brew install gh
+ssh-keygen -t ed25519 -C $newgitemail
+ssh-add ~/.ssh/id_ed25519
+gh config set editor vim
+gh config set git_protocol ssh --host github.com
+gh auth login
+gh ssh-key add ~/.ssh/id_ed25519.pub
+ssh -T git@github.com
+
+echo "Adding a GPG key:"
+echo "Supported GPG key algorithms: RSA, ElGamal, DSA, ECDH, ECDSA, EdDSA."
+echo "Your key must be at least 4096 bits."
+gpg --full-generate-key
+gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep 'qbantek@gmail.com' | head -n 1 | cut -d':' -f5F`
+ascii_key=`gpg --armor --export "$gpg_key_id"`
+git config --global user.signingkey $gpg_key_id
+git config --global commit.gpgsign true
+gh gpg-key add $ascii_key
+
 # clone or update dotfiles from GitHub
-BASEDIR="$HOME/dotfiles"
-if [ -d "$BASEDIR/.git" ]; then
+basedir="$HOME/dotfiles"
+repourl="git@github.com:qbantek/dotfiles.git"
+if [ -d "$basedir/.git" ]; then
   echo "Updating dotfiles using existing git..."
-  cd "$BASEDIR"
+  cd "$basedir"
   git pull --quiet --rebase origin master || exit 1
 else
   echo "Checking out dotfiles using git..."
-  rm -rf "$BASEDIR"
-  REPOURL="https://github.com/qbantek/dotfiles.git"
-  git clone --quiet --depth=1 "$REPOURL" "$BASEDIR"
+  rm -rf "$basedir"
+  git clone --quiet --depth=1 "$repourl" "$basedir"
 fi
 
 # zsh
