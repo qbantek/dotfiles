@@ -6,7 +6,6 @@ require("telescope").setup{
     prompt_prefix = '> ',
     vimgrep_arguments = {
       "rg",
-      "--color=never",
       "--no-heading",
       "--with-filename",
       "--line-number",
