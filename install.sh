@@ -9,11 +9,19 @@ brew analytics off
 brew update
 brew install gnupg  # make sure we have gpg available
 
-# ToDo: add MacOS specific settings
 # mac
+if test "$(uname)" = "Darwin"; then 
+  sudo softwareupdate --install --all
+  sudo xcode-select --install
+  sudo xcodebuild -license accept
+fi
 
 # git
 brew install git
+# see https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
+git config --global core.trustctime false
+git config --global core.editor vim
+git config --global core.excludesfile ~/.gitignore_global
 
 # username
 gitname=`git config --global user.name`
@@ -40,19 +48,20 @@ fi
 
 # GitHub
 brew install gh
-ssh-keygen -t ed25519 -C $newgitemail
-ssh-add ~/.ssh/id_ed25519
 gh config set editor vim
 gh config set git_protocol ssh --host github.com
-gh auth login
-gh ssh-key add ~/.ssh/id_ed25519.pub
-ssh -T git@github.com
 
+# setup git ssh to GitHub
+ssh-keygen -t ed25519 -C $newgitemail
+ssh-add ~/.ssh/id_ed25519
+gh auth login
+
+# setup gpg signed commits
 echo "Adding a GPG key:"
 echo "Supported GPG key algorithms: RSA, ElGamal, DSA, ECDH, ECDSA, EdDSA."
 echo "Your key must be at least 4096 bits."
 gpg --full-generate-key
-gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep 'qbantek@gmail.com' | head -n 1 | cut -d':' -f5F`
+gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep "$newgitemail" | head -n 1 | cut -d':' -f5F`
 ascii_key=`gpg --armor --export "$gpg_key_id"`
 git config --global user.signingkey $gpg_key_id
 git config --global commit.gpgsign true
