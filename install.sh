@@ -131,6 +131,8 @@ brew install tree # directory structure as a 'tree'
 brew install bat  # cooler cat
 brew install ripgrep
 brew install fd   # simple, fast and user-friendly alternative to find
+brew install fzf  # fuzzy finder
+sh -c '/opt/homebrew/opt/fzf/install'
 brew install --cask visual-studio-code
 brew install --cask docker
 brew install --cask google-chrome

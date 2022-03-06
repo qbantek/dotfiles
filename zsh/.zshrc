@@ -30,10 +30,12 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
+  fzf-tab # to turn it on and off: toggle-fzf-tab
   git 
   zsh-autosuggestions 
   zsh-syntax-highlighting 
   colored-man-pages
+  fzf
 )
 
 # Path to your oh-my-zsh installation.
@@ -57,6 +59,12 @@ source "$HOME/.iterm2_shell_integration.zsh"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# fzf completion and key bindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # To have paths colored instead of underlined
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
@@ -66,3 +74,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
