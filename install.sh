@@ -103,6 +103,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm install --lts
 npm install --global npm@latest
 npm install --global yarn
+export PATH="$PATH:`yarn global bin`"
 
 # go
 brew install golang
