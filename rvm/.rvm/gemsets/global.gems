@@ -1,4 +1,5 @@
 solargraph
+gem-ctags
 gem-wrappers
 rubygems-bundler
 rake
