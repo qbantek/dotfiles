@@ -14,6 +14,9 @@ if test "$(uname)" = "Darwin"; then
   sudo softwareupdate --install --all
   sudo xcode-select --install
   sudo xcodebuild -license accept
+
+  # show hidden files
+  defaults write com.apple.Finder AppleShowAllFiles true
 fi
 
 # git
