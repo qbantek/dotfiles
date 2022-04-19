@@ -1,7 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim' "libraries for nvim-lua
+Plug 'neovim/nvim-lspconfig' "collection of common configuration for nvim language server client.
 
 " Completion and snippets
 Plug 'hrsh7th/cmp-nvim-lsp'
