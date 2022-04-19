@@ -24,6 +24,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
