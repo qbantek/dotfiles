@@ -1,18 +1,22 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'nvim-lua/plenary.nvim' "libraries for nvim-lua
-Plug 'neovim/nvim-lspconfig' "collection of common configuration for nvim language server client.
 
 " Completion and snippets
+Plug 'neovim/nvim-lspconfig' "collection of common configuration for nvim language server client.
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+
+" For vsnip users.
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'windwp/lsp-fastaction.nvim'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets' "collection of snippets for diff languages
+
+Plug 'windwp/lsp-fastaction.nvim' "map lsp code action to key & sort the code action
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'christoomey/vim-tmux-navigator'
