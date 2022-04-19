@@ -1,6 +1,5 @@
-local nvim_lsp = require('lspconfig')
-local servers = { 'solargraph' }
-
+local lsp_installer = require("nvim-lsp-installer")
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -30,14 +29,20 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-for _, lsp in pairs(servers) do
-  nvim_lsp[lsp].setup {
+lsp_installer.on_server_ready(function(server)
+  local opts = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = {'vim'},
+        },
+      },
+    },
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     },
     capabilities = capabilities
   }
-end
+  server:setup(opts)
+end)

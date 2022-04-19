@@ -47,3 +47,6 @@ set mouse=a
 set textwidth=80 " Make it obvious where 80 characters is
 set colorcolumn=80
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+
+" use fzf in vim
+set rtp+=/opt/homebrew/opt/fzf
