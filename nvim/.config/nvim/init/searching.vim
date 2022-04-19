@@ -11,6 +11,10 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" Change the current word in insertmode.
+" Auto places you into the spot where you can start typing to change it.
+nnoremap <C-w><C-r> :%s/<C-r><C-w>//g<LEFT><LEFT>
+
 " Map Ctrl-n to NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
