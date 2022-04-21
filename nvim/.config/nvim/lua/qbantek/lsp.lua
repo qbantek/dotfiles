@@ -1,14 +1,18 @@
 local lsp_installer = require("nvim-lsp-installer")
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+---@diagnostic disable-next-line: unused-local
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
 
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
@@ -30,19 +34,42 @@ local on_attach = function(client, bufnr)
 end
 
 lsp_installer.on_server_ready(function(server)
-  local opts = {
-    settings = {
+  local opts = {}
+  opts.on_attach = on_attach
+  opts.capabilities = capabilities
+
+  if server.name == "sumneko_lua" then
+    local runtime_path = vim.split(package.path, ';')
+    table.insert(runtime_path, "lua/?.lua")
+    table.insert(runtime_path, "lua/?/init.lua")
+
+    opts.settings = {
       Lua = {
-        diagnostics = {
-          globals = {'vim'},
+        runtime = {
+          version = 'LuaJIT',
+          path = runtime_path,
         },
+        diagnostics = {
+          enable = true,
+          globals = { 'vim' },
+        }
       },
-    },
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    capabilities = capabilities
-  }
+    }
+  end
+
+  -- if server.name == "solargraph" then
+  --   opts.settings = {
+  --     solargraph = {
+  --       autoformat = true,
+  --       completion = true,
+  --       diagnostic = true,
+  --       folding = true,
+  --       references = true,
+  --       rename = true,
+  --       symbols = true
+  --     },
+  --   }
+  -- end
+
   server:setup(opts)
 end)

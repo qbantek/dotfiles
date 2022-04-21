@@ -2,20 +2,25 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'nvim-lua/plenary.nvim' "libraries for nvim-lua
 
-" Completion and snippets
-Plug 'neovim/nvim-lspconfig' "collection of common configuration for nvim language server client.
+" LSP cmp
+" Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-copilot'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'petertriho/cmp-git'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-buffer' "nvim-cmp source for buffer words
+Plug 'hrsh7th/cmp-path' "nvim-cmp source for path
+Plug 'hrsh7th/cmp-cmdline' "nvim-cmp source for cmdline
+Plug 'petertriho/cmp-git' "nvim-cmp source for git
+Plug 'hrsh7th/cmp-vsnip' "nvim-cmp source for vim-vsnip
+Plug 'hrsh7th/nvim-cmp' "completion engine plugin for neovim
+
+Plug 'hrsh7th/vim-vsnip' "snippet plugin for vim/nvim supporting LSP format
 Plug 'hrsh7th/vim-vsnip-integ'
+
+" LSP server configurations
+Plug 'neovim/nvim-lspconfig' "collection of common configuration for nvim language server client.
 Plug 'williamboman/nvim-lsp-installer' "seamlessly install LSP servers locally
 Plug 'windwp/lsp-fastaction.nvim' "map lsp code action to key & sort the code action
+
+" Snippets and completion
 Plug 'rafamadriz/friendly-snippets' "collection of snippets for diff languages
 
 Plug 'AndrewRadev/splitjoin.vim'

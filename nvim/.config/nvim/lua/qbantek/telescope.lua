@@ -1,6 +1,6 @@
 local actions = require("telescope.actions")
 
-require("telescope").setup{
+require("telescope").setup {
   defaults = {
     file_sorter = require('telescope.sorters').get_fzy_sorter,
     prompt_prefix = '> ',
@@ -15,7 +15,7 @@ require("telescope").setup{
       "--smart-case",
       "--trim" -- add this value
     },
-    
+
     mappings = {
       i = {
         ["<esc>"] = actions.close
