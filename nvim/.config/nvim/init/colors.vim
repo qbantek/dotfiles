@@ -1,7 +1,2 @@
-set termguicolors
+" Must be set after solarized plugin is loaded!
 colorscheme solarized8
-augroup highlight_yank
-  autocmd!
-  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
-augroup END
-

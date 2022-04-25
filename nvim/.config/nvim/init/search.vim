@@ -1,18 +1,11 @@
-set tags=tags;
-set tags+=gems.tags; " Support for gem ctags
-
-" Ignore when expanding wildcards
-set wildignore=*/node_modules/*,*/tmp/*,*/.idea/*,*/.git/*
-
-" This unsets the "last search pattern" register by hitting return 
+" suspend `hlsearch` highlighting
 nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 " Scroll the screen and do not move the cursor when jumping to next result
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Change the current word in insertmode.
-" Auto places you into the spot where you can start typing to change it.
+" Substitutes the current word
 nnoremap <C-w><C-r> :%s/<C-r><C-w>//g<LEFT><LEFT>
 
 " Map Ctrl-n to NERDTree

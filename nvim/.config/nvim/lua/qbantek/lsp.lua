@@ -39,15 +39,10 @@ lsp_installer.on_server_ready(function(server)
   opts.capabilities = capabilities
 
   if server.name == "sumneko_lua" then
-    local runtime_path = vim.split(package.path, ';')
-    table.insert(runtime_path, "lua/?.lua")
-    table.insert(runtime_path, "lua/?/init.lua")
-
     opts.settings = {
       Lua = {
-        runtime = {
-          version = 'LuaJIT',
-          path = runtime_path,
+        format = {
+          enable = true,
         },
         diagnostics = {
           enable = true,
@@ -57,19 +52,19 @@ lsp_installer.on_server_ready(function(server)
     }
   end
 
-  -- if server.name == "solargraph" then
-  --   opts.settings = {
-  --     solargraph = {
-  --       autoformat = true,
-  --       completion = true,
-  --       diagnostic = true,
-  --       folding = true,
-  --       references = true,
-  --       rename = true,
-  --       symbols = true
-  --     },
-  --   }
-  -- end
+  if server.name == "solargraph" then
+    opts.settings = {
+      solargraph = {
+        autoformat = true,
+        completion = true,
+        diagnostics = true,
+        folding = true,
+        references = true,
+        rename = true,
+        symbols = true
+      },
+    }
+  end
 
   server:setup(opts)
 end)

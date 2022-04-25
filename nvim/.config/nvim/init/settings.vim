@@ -4,6 +4,7 @@
 " set to the OLD leader.
 let mapleader=" "
 
+set nocompatible
 set syntax=on
 set confirm
 set showcmd
@@ -35,17 +36,21 @@ if has("persistent_undo")
   set undodir=~/.config/nvim/undodir
   set undofile
 endif
+set wildignore+=**/.git/*
 set wildignore+=**/coverage/*
 set wildignore+=**/node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
-set wildignore+=**/.git/*
+set wildignore+=**/tmp/*
+set tags=tags
+set tags+=gems.tags " Support for gem ctags
 set splitbelow
 set splitright
 set hidden
 set mouse=a
 set textwidth=80 " Make it obvious where 80 characters is
 set colorcolumn=80
+set termguicolors
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 " use fzf in vim

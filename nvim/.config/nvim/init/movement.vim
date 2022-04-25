@@ -1,5 +1,5 @@
 " Map jk to Esc, easier to type
-:inoremap jk <Esc>
+inoremap jk <Esc>
 
 " Disable arrow movement, re-size splits instead.
 nnoremap <Up>    :resize +2<CR>
