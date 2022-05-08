@@ -25,26 +25,10 @@ git config --global core.editor vim
 git config --global core.excludesfile ~/.gitignore_global
 
 # username
-gitname=`git config --global user.name`
-if [ -z "$gitname" ]; then
-	gitname="Erich N Quintero"
-fi
-read -p "Enter git committer name (return to use '$gitname'): " -e newgitname
-if [ -z "$newgitname" ]; then
-	newgitname=$gitname
-fi
-`git config --global user.name "$newgitname"`
+git config --global user.name "Erich N Quintero"
 
 # email
-gitemail=`git config --global user.email`
-if [ -z "$gitemail" ]; then
-	gitemail="qbantek@gmail.com"
-fi
-read -p "Enter git committer email (return to use '$gitemail'): " -e newgitemail
-if [ -z "$newgitemail" ]; then
-	newgitemail=$gitemail
-fi
-`git config --global user.email "$newgitemail"`
+git config --global user.email "qbantek@gmail.com"
 
 
 # GitHub
