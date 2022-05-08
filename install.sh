@@ -12,9 +12,8 @@ brew install gnupg  # make sure we have gpg available
 # mac
 if test "$(uname)" = "Darwin"; then 
   sudo softwareupdate --install --all
-  check=$((xcode-\select --install) 2>&1)
-  echo $check
-  sudo xcodebuild -license accept
+  check=$((xcode-select --install) 2>&1)
+  check=$((sudo xcodebuild -license accept) 2>&1)
 
   # show hidden files
   defaults write com.apple.Finder AppleShowAllFiles true
