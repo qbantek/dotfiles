@@ -1,63 +1,63 @@
 #!/bin/sh
 
 { # This ensures the entire script is downloaded.
-# brew & tools
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-brew analytics off
-brew update
-brew install gnupg  # make sure we have gpg available
+# # brew & tools
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# brew analytics off
+# brew update
+# brew install gnupg  # make sure we have gpg available
 
-# mac
-sudo softwareupdate --install --all
-check1=$((sudo xcode-\select --install) 2>&1)
-check2=$((sudo xcodebuild -license accept) 2>&1)
+# # mac
+# sudo softwareupdate --install --all
+# check1=$((sudo xcode-\select --install) 2>&1)
+# check2=$((sudo xcodebuild -license accept) 2>&1)
 
-# show hidden files
-defaults write com.apple.Finder AppleShowAllFiles true
+# # show hidden files
+# defaults write com.apple.Finder AppleShowAllFiles true
 
-# git
-brew install git
-# see https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
-git config --global core.trustctime false
-git config --global core.editor vim
-git config --global core.excludesfile ~/.gitignore_global
-git config --global user.name "Erich N Quintero"
-git config --global user.email "qbantek@gmail.com"
+# # git
+# brew install git
+# # see https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
+# git config --global core.trustctime false
+# git config --global core.editor vim
+# git config --global core.excludesfile ~/.gitignore_global
+# git config --global user.name "Erich N Quintero"
+# git config --global user.email "qbantek@gmail.com"
 
 
-# GitHub
-brew install gh
-gh config set editor vim
-gh config set git_protocol ssh --host github.com
+# # GitHub
+# brew install gh
+# gh config set editor vim
+# gh config set git_protocol ssh --host github.com
 
-# setup git ssh to GitHub
-ssh-keygen -t ed25519 -C $newgitemail
-ssh-add ~/.ssh/id_ed25519
-gh auth login
+# # setup git ssh to GitHub
+# ssh-keygen -t ed25519 -C $newgitemail
+# ssh-add ~/.ssh/id_ed25519
+# gh auth login
 
-# setup gpg signed commits
-echo "Adding a GPG key:"
-echo "Supported GPG key algorithms: RSA, ElGamal, DSA, ECDH, ECDSA, EdDSA."
-echo "Your key must be at least 4096 bits."
-gpg --full-generate-key
-gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep "$newgitemail" | head -n 1 | cut -d':' -f5F`
-ascii_key=`gpg --armor --export "$gpg_key_id"`
-git config --global user.signingkey $gpg_key_id
-git config --global commit.gpgsign true
-gh gpg-key add $ascii_key
+# # setup gpg signed commits
+# echo "Adding a GPG key:"
+# echo "Supported GPG key algorithms: RSA, ElGamal, DSA, ECDH, ECDSA, EdDSA."
+# echo "Your key must be at least 4096 bits."
+# gpg --full-generate-key
+# gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep "$newgitemail" | head -n 1 | cut -d':' -f5F`
+# ascii_key=`gpg --armor --export "$gpg_key_id"`
+# git config --global user.signingkey $gpg_key_id
+# git config --global commit.gpgsign true
+# gh gpg-key add $ascii_key
 
-# clone or update dotfiles from GitHub
-basedir="$HOME/dotfiles"
-repourl="git@github.com:qbantek/dotfiles.git"
-if [ -d "$basedir/.git" ]; then
-  echo "Updating dotfiles using existing git..."
-  cd "$basedir"
-  git pull --quiet --rebase origin master || exit 1
-else
-  echo "Checking out dotfiles using git..."
-  rm -rf "$basedir"
-  git clone --quiet --depth=1 "$repourl" "$basedir"
-fi
+# # clone or update dotfiles from GitHub
+# basedir="$HOME/dotfiles"
+# repourl="git@github.com:qbantek/dotfiles.git"
+# if [ -d "$basedir/.git" ]; then
+#   echo "Updating dotfiles using existing git..."
+#   cd "$basedir"
+#   git pull --quiet --rebase origin master || exit 1
+# else
+#   echo "Checking out dotfiles using git..."
+#   rm -rf "$basedir"
+#   git clone --quiet --depth=1 "$repourl" "$basedir"
+# fi
 
 # zsh
 brew install zsh
