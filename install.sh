@@ -62,7 +62,7 @@ fi
 # zsh
 brew install zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
   "$ZSH_CUSTOM/themes/powerlevel10k"
 git clone https://github.com/zsh-users/zsh-autosuggestions \
@@ -76,13 +76,13 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # nvm 0.39.1 and latest lts node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
+NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 nvm install --lts
 npm install --global npm@latest
 npm install --global yarn
-export PATH="$PATH:`yarn global bin`"
+PATH="$PATH:`yarn global bin`"
 
 # go
 brew install golang
