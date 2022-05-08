@@ -46,18 +46,14 @@
 # git config --global commit.gpgsign true
 # gh gpg-key add $ascii_key
 
-# # clone or update dotfiles from GitHub
-# basedir="$HOME/dotfiles"
-# repourl="git@github.com:qbantek/dotfiles.git"
-# if [ -d "$basedir/.git" ]; then
-#   echo "Updating dotfiles using existing git..."
-#   cd "$basedir"
-#   git pull --quiet --rebase origin master || exit 1
-# else
-#   echo "Checking out dotfiles using git..."
-#   rm -rf "$basedir"
-#   git clone --quiet --depth=1 "$repourl" "$basedir"
-# fi
+# clone dotfiles from GitHub
+basedir="$HOME/dotfiles"
+repourl="git@github.com:qbantek/dotfiles.git"
+echo "Checking out dotfiles using git..."
+rm -rf "$basedir"
+git clone "$repourl" "$basedir"
+cd "$basedir"
+git checkout mbpro
 
 # # zsh
 # brew install zsh
@@ -118,13 +114,8 @@
 # brew install --cask google-chrome
 # brew install --cask postman
 
-# # stow
-# brew install stow
-
-basedir="$HOME/dotfiles"
-cd "$basedir"
-git checkout mbpro
-
+# stow
+brew install stow
 stow gem
 stow git
 stow nvim
