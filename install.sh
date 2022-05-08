@@ -115,10 +115,10 @@ git checkout mbpro
 # brew install --cask postman
 
 # stow
-brew install stow
+# brew install stow
 
 rm -rf ~/.zshrc
-rm -rf ~/.config/nvim/
+rm -rf ~/.config/nvim
 rm -rf ~/.rvm/gemsets/global.gems
 
 stow gem
