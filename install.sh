@@ -13,7 +13,7 @@ brew install gnupg  # make sure we have gpg available
 if test "$(uname)" = "Darwin"; then 
   sudo softwareupdate --install --all
   check=$((xcode-\select --install) 2>&1)
-  echo check
+  echo $check
   sudo xcodebuild -license accept
 
   # show hidden files
