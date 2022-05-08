@@ -8,14 +8,12 @@ brew update
 brew install gnupg  # make sure we have gpg available
 
 # mac
-if test "$(uname)" = "Darwin"; then 
-  # sudo softwareupdate --install --all
-  # check=$((sudo xcode-\select --install) 2>&1)
-  # check=$((sudo xcodebuild -license accept) 2>&1)
+sudo softwareupdate --install --all
+check1=$((sudo xcode-\select --install) 2>&1)
+check2=$((sudo xcodebuild -license accept) 2>&1)
 
-  # show hidden files
-  defaults write com.apple.Finder AppleShowAllFiles true
-fi
+# show hidden files
+defaults write com.apple.Finder AppleShowAllFiles true
 
 # git
 brew install git
