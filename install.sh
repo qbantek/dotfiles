@@ -118,8 +118,11 @@ git checkout mbpro
 brew install stow
 stow gem
 stow git
+rm -rf ~/.config/nvim/
 stow nvim
+rm -rf ~/.rvm/gemsets/global.gems
 stow rvm
+rm -rf .zshrc
 stow zsh
 
 # install nvim plugins
