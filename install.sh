@@ -117,7 +117,7 @@ git checkout mbpro
 # stow
 brew install stow
 
-rm -rf .zshrc
+rm -rf ~/.zshrc
 rm -rf ~/.config/nvim/
 rm -rf ~/.rvm/gemsets/global.gems
 
