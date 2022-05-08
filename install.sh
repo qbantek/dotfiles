@@ -123,6 +123,7 @@
 
 basedir="$HOME/dotfiles"
 cd "$basedir"
+git checkout mbpro
 
 stow gem
 stow git
