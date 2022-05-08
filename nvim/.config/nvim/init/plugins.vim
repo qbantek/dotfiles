@@ -42,6 +42,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-test/vim-test'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Themes
 Plug 'lifepillar/vim-solarized8'
