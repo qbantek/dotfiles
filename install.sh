@@ -1,8 +1,6 @@
 #!/bin/sh
 
 { # This ensures the entire script is downloaded.
-set -eo pipefail
-
 # brew & tools
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew analytics off
