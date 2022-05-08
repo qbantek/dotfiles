@@ -4,7 +4,7 @@
 set -eo pipefail
 
 # brew & tools
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew analytics off
 brew update
 brew install gnupg  # make sure we have gpg available
