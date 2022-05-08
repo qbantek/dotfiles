@@ -21,11 +21,7 @@ brew install git
 git config --global core.trustctime false
 git config --global core.editor vim
 git config --global core.excludesfile ~/.gitignore_global
-
-# username
 git config --global user.name "Erich N Quintero"
-
-# email
 git config --global user.email "qbantek@gmail.com"
 
 
