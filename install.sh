@@ -1,11 +1,6 @@
 #!/bin/sh
 
 { # This ensures the entire script is downloaded.
-# brew & tools
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-brew analytics off
-brew update
-
 # mac
 sudo softwareupdate --install --all
 check1=$((sudo xcode-\select --install) 2>&1)
@@ -13,6 +8,11 @@ check2=$((sudo xcodebuild -license accept) 2>&1)
 
 # show hidden files
 defaults write com.apple.Finder AppleShowAllFiles true
+
+# brew & tools
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+brew analytics off
+brew update
 
 # git
 brew install git
