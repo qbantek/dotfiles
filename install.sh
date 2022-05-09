@@ -16,6 +16,7 @@ mas search xcode | head -5 # search for Xcode showing only the first 5 results
 mas install 497799835 # appid for Xcode
 sudo xcode-select --reset  # Sets the path for the active developer directory to /Applications/Xcode.app/Contents/Developer
 sudo softwareupdate --install --all --agree-to-license # Update all Apple software and auto agree to any licenses 
+sudo xcodebuild -license accept # agree to xcode license
 
 # show hidden files
 defaults write com.apple.Finder "AppleShowAllFiles" -bool true
