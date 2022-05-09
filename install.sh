@@ -29,7 +29,7 @@ gh config set editor vim
 gh config set git_protocol ssh --host github.com
 
 # setup git ssh to GitHub
-ssh-keygen -t ed25519 -C $newgitemail
+ssh-keygen -t ed25519 -C qbantek@gmail.com
 ssh-add ~/.ssh/id_ed25519
 gh auth login
 
@@ -38,7 +38,7 @@ echo "Adding a GPG key:"
 echo "Supported GPG key algorithms: RSA, ElGamal, DSA, ECDH, ECDSA, EdDSA."
 echo "Your key must be at least 4096 bits."
 gpg --full-generate-key
-gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep "$newgitemail" | head -n 1 | cut -d':' -f5F`
+gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep 'qbantek@gmail.com' | head -n 1 | cut -d':' -f5F`
 ascii_key=`gpg --armor --export "$gpg_key_id"`
 git config --global user.signingkey $gpg_key_id
 git config --global commit.gpgsign true
