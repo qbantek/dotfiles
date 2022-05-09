@@ -58,11 +58,11 @@
 # gh gpg-key add $ascii_key
 
 # # clone dotfiles from GitHub
-# basedir="$HOME/dotfiles"
+basedir="$HOME/dotfiles"
 # rm -rf "$basedir"
 # git clone git@github.com:qbantek/dotfiles.git "$basedir"
-# cd "$basedir"
-# git checkout mbpro # mac branch
+cd "$basedir"
+git checkout mbpro # mac branch
 
 # brew install gnupg  # make sure we have gpg available
 # brew install iterm2 # preferred terminal
