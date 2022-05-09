@@ -2,20 +2,20 @@
 
 { # This ensures the entire script is downloaded.
 
-# Install Command-line tools as dependency for Homebrew
-xcode-select --install # Sets the path for the active developer directory to /Library/Developer/CommandLineTools
+# # Install Command-line tools as dependency for Homebrew
+# xcode-select --install # Sets the path for the active developer directory to /Library/Developer/CommandLineTools
 
-# brew & tools
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-brew analytics off
-brew update
-brew install mas #  command-line interface for Mac App Store
+# # brew & tools
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# brew analytics off
+# brew update
+# brew install mas #  command-line interface for Mac App Store
 
-# Xcode
-mas search xcode | head -5 # search for Xcode showing only the first 5 results
-mas install 497799835 # appid for Xcode
-sudo xcode-select --reset  # Sets the path for the active developer directory to /Applications/Xcode.app/Contents/Developer
-sudo softwareupdate --install --all --agree-to-license # Update all Apple software and auto agree to any licenses 
+# # Xcode
+# mas search xcode | head -5 # search for Xcode showing only the first 5 results
+# mas install 497799835 # appid for Xcode
+# sudo xcode-select --reset  # Sets the path for the active developer directory to /Applications/Xcode.app/Contents/Developer
+# sudo softwareupdate --install --all --agree-to-license # Update all Apple software and auto agree to any licenses 
 sudo xcodebuild -license accept # agree to xcode license
 
 # show hidden files
