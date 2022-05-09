@@ -1,18 +1,23 @@
 #!/bin/sh
 
 { # This ensures the entire script is downloaded.
-# mac
-sudo softwareupdate --install --all
-check1=$((sudo xcode-\select --install) 2>&1)
-check2=$((sudo xcodebuild -license accept) 2>&1)
 
-# show hidden files
-defaults write com.apple.Finder AppleShowAllFiles true
+check1=$((sudo xcode-\select --install) 2>&1) # Install Command-line tools as dependency for Homebrew
 
 # brew & tools
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew analytics off
 brew update
+brew install mas #  command-line interface for Mac App Store
+
+# Xcode
+mas search xcode | head -5 # search for Xcode showing only the first 5 results
+mas install 497799835 # appid for Xcode
+sudo xcode-select -r  # Reset the development directory path to point to Xcode
+sudo softwareupdate --install --all --agree-to-license # Update all Apple software and auto agree to any licenses 
+
+# show hidden files
+defaults write com.apple.Finder AppleShowAllFiles true
 
 # git
 brew install git
@@ -49,7 +54,7 @@ basedir="$HOME/dotfiles"
 rm -rf "$basedir"
 git clone git@github.com:qbantek/dotfiles.git "$basedir"
 cd "$basedir"
-git checkout mbpro
+git checkout mbpro # mac branch
 
 brew install gnupg  # make sure we have gpg available
 brew install iterm2 # preferred terminal
