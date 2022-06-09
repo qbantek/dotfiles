@@ -5,6 +5,7 @@ Plug 'nvim-lua/plenary.nvim' "libraries for nvim-lua
 " LSP server configurations
 Plug 'neovim/nvim-lspconfig' "collection of common configuration for nvim language server client.
 Plug 'williamboman/nvim-lsp-installer' "seamlessly install LSP servers locally
+Plug 'tami5/lspsaga.nvim' " lightweight LSP plugin with highly performant UI
 
 " Nvim Completion
 Plug 'hrsh7th/cmp-buffer' "nvim-cmp source for buffer words
@@ -33,11 +34,13 @@ Plug 'preservim/nerdtree'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'github/copilot.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion'
+Plug 'rlue/vim-fold-rspec'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-Plug 'kristijanhusak/vim-dadbod-completion'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
@@ -45,7 +48,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-test/vim-test'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Themes
 Plug 'lifepillar/vim-solarized8'
