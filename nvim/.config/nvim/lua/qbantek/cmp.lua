@@ -1,5 +1,5 @@
 -- Setup nvim-cmp.
-local cmp = require 'cmp'
+local cmp = require("cmp")
 
 cmp.setup({
   snippet = {
@@ -11,41 +11,41 @@ cmp.setup({
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
+    { name = "nvim_lsp" },
+    { name = "vsnip" },
   }, {
-    { name = 'buffer' },
+    { name = "buffer" },
   })
 })
 
 -- Set configuration for git commits.
-cmp.setup.filetype('gitcommit', {
+cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources({
-    { name = 'cmp_git' },
+    { name = "cmp_git" },
   }, {
-    { name = 'buffer' },
+    { name = "buffer" },
   })
 })
 
 -- Use buffer source for `/`
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline("/", {
   sources = {
-    { name = 'buffer' }
+    { name = "buffer" }
   }
 })
 
--- Use cmdline & path source for ':'
-cmp.setup.cmdline(':', {
+-- Use cmdline & path source for ":"
+cmp.setup.cmdline(":", {
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path" }
   }, {
-    { name = 'cmdline' }
+    { name = "cmdline" }
   })
 })
