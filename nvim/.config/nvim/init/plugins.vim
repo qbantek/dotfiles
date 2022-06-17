@@ -38,6 +38,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'kristijanhusak/vim-dadbod-completion'
 Plug 'rlue/vim-fold-rspec'
+Plug 'thosakwe/vim-flutter'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dadbod'
