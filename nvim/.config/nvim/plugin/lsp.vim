@@ -1,8 +1,8 @@
-autocmd BufWritePre *.rb lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.vim lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.rb lua vim.lsp.buf.format()
+autocmd BufWritePre *.go lua vim.lsp.buf.format()
+autocmd BufWritePre *.js lua vim.lsp.buf.format()
+autocmd BufWritePre *.lua lua vim.lsp.buf.format()
+autocmd BufWritePre *.vim lua vim.lsp.buf.format()
 
 augroup lspsaga_filetypes
   autocmd!

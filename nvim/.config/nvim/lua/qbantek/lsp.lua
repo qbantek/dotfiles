@@ -24,7 +24,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
   buf_set_keymap("n", "<space>sh", "<cmd>lua require('lspsaga.signature_help').signature_help()<cr>", opts)
   buf_set_keymap("n", "gr", "<cmd>lua require('lspsaga.provider').lsp_finder()<cr>", opts)
-  buf_set_keymap('n', '<space>bf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', '<space>bf', '<cmd>lua vim.lsp.buf.format({async=true})<CR>', opts)
 end
 
 lsp_installer.on_server_ready(function(server)
