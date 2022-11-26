@@ -34,10 +34,11 @@ return packer.startup(function(use)
   use("szw/vim-maximizer") -- maximizes and restores current window
 
   -- essential plugins
+  use("AndrewRadev/splitjoin.vim") -- split/join lines
+  use("tpope/vim-dispatch") -- async build and test runner
+  use("tpope/vim-fugitive") -- git integration
+  use("tpope/vim-projectionist") -- granular project configuration
   use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
-  use("tpope/vim-projectionist")
-  use("tpope/vim-dispatch")
-  use("AndrewRadev/splitjoin.vim")
 
   -- commenting with gc
   use("numToStr/Comment.nvim")
@@ -101,8 +102,7 @@ return packer.startup(function(use)
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
   -- Coding
-  use("tpope/vim-fugitive")
-  use("tpope/vim-rails")
+  use { 'tpope/vim-rails', ft = "ruby" }
   use("vim-test/vim-test")
   use("github/copilot.vim")
 

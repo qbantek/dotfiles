@@ -8,6 +8,12 @@ vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
 nvimtree.setup({
+  actions = {
+    open_file = {
+      -- close the explorer when you open a file
+      quit_on_open = true,
+    }
+  },
   renderer = {
     icons = {
       glyphs = {
