@@ -23,4 +23,7 @@ saga.setup({
     edit = "<CR>",
   },
   definition_preview_icon = "  ",
+  symbol_in_winbar = {
+    enable = false
+  }
 })
