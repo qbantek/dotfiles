@@ -4,25 +4,18 @@ if not saga_status then
 end
 
 saga.setup({
-  move_in_saga = {
-    prev = "<C-k>",
-    next = "<C-j>"
-  },
-  error_sign = "",
-  warn_sign = "",
-  hint_sign = "",
-  infor_sign = "",
-  dianostic_header_icon = "   ",
-  finder_definition_icon = "  ",
-  finder_reference_icon = "  ",
-  finder_action_keys = {
-    open = "<CR>", -- default
-  },
-  -- use enter to open file with definition preview
-  definition_action_keys = {
-    edit = "<CR>",
-  },
-  definition_preview_icon = "  ",
+  scroll_preview = {
+		scroll_up = '<C-k>',
+		scroll_down = '<C-j>',
+	},
+	--lsp finder
+	finder = {
+		edit = { '<CR>' },
+	},
+	-- peek definition
+	definition = {
+		edit = { '<CR>' },
+	},
   symbol_in_winbar = {
     enable = false
   }

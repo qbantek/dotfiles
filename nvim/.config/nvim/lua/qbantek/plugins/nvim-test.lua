@@ -1,16 +1,17 @@
-local M = {}
+local g = vim.g
+local api = vim.api
 
-function M.setup()
-    vim.g["test#strategy"] = "neovim"
-    vim.g["test#ruby#rspec#options"] = {
-        nearest = "--backtrace",
-        file = "--format documentation",
-        suite = "--tag ~slow",
-    }
-    vim.api.nvim_set_keymap("n", "<leader>t", ":TestNearest<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>T", ":TestFile<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", "<leader>a", ":TestSuite<CR>", { noremap = true, silent = true })
-end
+g["test#javascript#jest#options"] = "--watch --notify --notify-mode=change"
+g["test#ruby#rspec#options"] = {
+  file = "--format documentation",
+}
+g['test#strategy'] = {
+  nearest = 'dispatch_background',
+  file = 'dispatch_background',
+  suite = 'dispatch_background',
+}
 
-return M
-
+-- keymaps
+api.nvim_set_keymap("n", "<leader>tt", ":TestNearest<CR>", { noremap = true, silent = true })
+api.nvim_set_keymap("n", "<leader>tf", ":TestFile<CR>", { noremap = true, silent = true })
+api.nvim_set_keymap("n", "<leader>ta", ":TestSuite<CR>", { noremap = true, silent = true })
