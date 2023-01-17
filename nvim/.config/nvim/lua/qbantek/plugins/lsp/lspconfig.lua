@@ -36,7 +36,6 @@ local on_attach = function(client, bufnr)
   keymap.set("n", "gt", "<cmd>Lspsaga term_toggle<CR>", opts) -- simple float terminal
 
   keymap.set("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
-  keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
   keymap.set("n", "<leader>bf", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", opts) -- format current buffer
 
   -- typescript specific keymaps (e.g. rename file and update imports)
