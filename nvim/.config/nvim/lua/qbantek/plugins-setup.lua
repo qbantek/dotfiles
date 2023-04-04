@@ -79,6 +79,7 @@ return packer.startup(function(use)
   use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
   use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
   use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+  use ("smjonas/inc-rename.nvim") -- visual feedback when renaming
 
   -- formatting & linting
   use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
@@ -108,6 +109,14 @@ return packer.startup(function(use)
 
   -- Misc
   use("wakatime/vim-wakatime")
+
+  -- ChatGPT
+  use {
+    "dpayne/CodeGPT.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim"
+    }
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
