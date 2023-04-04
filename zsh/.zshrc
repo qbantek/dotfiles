@@ -31,9 +31,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   fzf-tab # to turn it on and off: toggle-fzf-tab
-  git 
-  zsh-autosuggestions 
-  zsh-syntax-highlighting 
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   colored-man-pages
   fzf
 )
@@ -73,7 +73,7 @@ ZSH_HIGHLIGHT_STYLES[path]='none'
 # libpq
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-# For compilers to find libpq you may need to set: 
+# For compilers to find libpq you may need to set:
 export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 
@@ -95,3 +95,6 @@ if [ -f '/Users/qbantek/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/qbantek
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/qbantek/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/qbantek/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Add aliases to GitHub Copilot CLI
+eval "$(github-copilot-cli alias -- "$0")"
