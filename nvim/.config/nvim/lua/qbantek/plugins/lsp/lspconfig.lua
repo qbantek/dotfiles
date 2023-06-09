@@ -107,14 +107,14 @@ lspconfig["solargraph"].setup({
 
 -- configure all other servers
 local servers = {
-  'html',
   'cssls',
   'dockerls',
+  'gopls',
+  'html',
   'jsonls',
   'spectral',
   'sqlls',
   'yamlls',
-  'gopls'
 }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
