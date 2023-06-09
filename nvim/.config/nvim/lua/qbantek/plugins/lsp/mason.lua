@@ -12,16 +12,16 @@ mason.setup()
 
 mason_lspconfig.setup({
   ensure_installed={
-    "tsserver",
-    "html",
     "cssls",
-    "lua_ls",
     "dockerls",
-    "jsonls",
-    "spectral",
-    "solargraph",
-    "sqlls",
-    "yamlls",
     "gopls",
+    "html",
+    "jsonls",
+    "lua_ls",
+    "solargraph",
+    "spectral",
+    "sqlls",
+    "tsserver",
+    "yamlls",
   }
 })
