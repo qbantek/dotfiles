@@ -30,6 +30,7 @@ treesitter.setup({
     "tsx",
     "typescript",
     "vim",
+    "vimdoc",
     "yaml",
   },
   auto_install = true,
