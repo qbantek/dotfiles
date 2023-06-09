@@ -21,9 +21,8 @@ local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
   -- set keybinds
-  keymap.set("n", "<leader>rn", function()
-    return ":IncRename " .. vim.fn.expand("<cword>")
-  end, { expr = true }) -- smart rename with immediate visual effect
+  keymap.set("n", "<leader>rr", "<cmd>Lspsaga rename ++project<CR>", opts) -- rename symbol for the selected files
+  keymap.set("n", "<leader>rn", function() return ":IncRename " .. vim.fn.expand("<cword>") end, { expr = true }) -- smart rename with immediate visual effect
   keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
   keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 
@@ -58,7 +57,12 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
 -- configure typescript server with plugin
+-- https://github.com/jose-elias-alvarez/typescript.nvim
 typescript.setup({
   server = {
     capabilities = capabilities,
