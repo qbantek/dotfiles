@@ -40,14 +40,14 @@ defaults write com.apple.dock "tilesize" -int "40" # size of icons in the dock
 brew install git
 # see https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
 git config --global core.trustctime false
-git config --global core.editor vim
+git config --global core.editor nvim
 git config --global core.excludesfile ~/.gitignore_global
 git config --global user.name "Erich N Quintero"
 git config --global user.email "qbantek@gmail.com"
 
 # GitHub
 brew install gh
-gh config set editor vim
+gh config set editor nvim
 gh config set git_protocol ssh --host github.com
 
 # setup git ssh to GitHub
