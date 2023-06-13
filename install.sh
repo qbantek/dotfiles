@@ -44,6 +44,9 @@ git config --global core.editor nvim
 git config --global core.excludesfile ~/.gitignore_global
 git config --global user.name "Erich N Quintero"
 git config --global user.email "qbantek@gmail.com"
+git config --global pull.rebase true
+git config --global push.autosetupremote true
+
 
 # GitHub
 brew install gh
