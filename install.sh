@@ -3,6 +3,8 @@
 { # This ensures the entire script is downloaded.
 
 # OSx settings
+echo "Configuring OS..."
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.Finder "AppleShowAllFiles" -bool true # show hidden files
 defaults write com.apple.TimeMachine "DoNotOfferNewDisksForBackup" -bool true # don't offer to create new disks on TimeMachine
 defaults write com.apple.dock "autohide" -bool true # hide dock
@@ -157,4 +159,6 @@ stow git
 stow nvim
 stow rvm
 stow zsh
+
+echo "Macbook setup completed!"
 } # This ensures the entire script is downloaded.
