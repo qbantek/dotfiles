@@ -63,7 +63,7 @@ else
   # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
   touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
   PROD=$(softwareupdate -l | grep "\*.*Command Line" | tail -n 1 | sed 's/^[^C]* //')
-  softwareupdate --install "$PROD" --verbose --all --agree-to-license
+  softwareupdate --install "$PROD" --verbose --agree-to-license
 fi
 
 # git
