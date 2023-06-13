@@ -2,17 +2,52 @@
 
 { # This ensures the entire script is downloaded.
 
+# OSx settings
+defaults write com.apple.Finder "AppleShowAllFiles" -bool true # show hidden files
+defaults write com.apple.TimeMachine "DoNotOfferNewDisksForBackup" -bool true # don't offer to create new disks on TimeMachine
+defaults write com.apple.dock "autohide" -bool true # hide dock
+defaults write com.apple.dock "tilesize" -int "40" # size of icons in the dock
+
 # brew & tools
 # Check for Homebrew to be present, install if it's missing
 if test ! $(which brew); then
-    echo "Installing homebrew..."
-    # install xcode CLI
     xcode-select --install
-    # install brew
+    echo "Installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew analytics off
 brew update
+
+# brew
+PACKAGES=(
+    gnupg
+    git
+    gh
+    golang
+    tree
+    bat
+    ripgrep
+    fd
+    fzf
+    ctags
+    zsh
+    python
+    tmux
+    stow
+    mas
+)
+echo "Installing brew packages..."
+brew install ${PACKAGES[@]}
+echo "Installing casks..."
+CASKS=(
+    iterm2
+    docker
+    visual-studio-code
+    postman
+    google-chrome
+)
+echo "Installing cask apps..."
+brew cask install ${CASKS[@]}
 
 # Xcode
 xcode-select -p &> /dev/null
@@ -20,7 +55,6 @@ if [ $? -eq 0 ]; then
   echo "Xcode is installed."
   echo "Command Line Tools for Xcode have been installed."
 else
-  brew install mas #  command-line interface for Mac App Store
   app_id=$(mas search Xcode | head -1 | awk '{print $1}')  
   mas install "$app_id"
 
@@ -30,14 +64,7 @@ else
   softwareupdate --install "$PROD" --verbose --all --agree-to-license
 fi
 
-# OSx settings
-defaults write com.apple.Finder "AppleShowAllFiles" -bool true # show hidden files
-defaults write com.apple.TimeMachine "DoNotOfferNewDisksForBackup" -bool true # don't offer to create new disks on TimeMachine
-defaults write com.apple.dock "autohide" -bool true # hide dock
-defaults write com.apple.dock "tilesize" -int "40" # size of icons in the dock
-
 # git
-brew install git
 # see https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
 git config --global core.trustctime false
 git config --global core.editor nvim
@@ -46,17 +73,6 @@ git config --global user.name "Erich N Quintero"
 git config --global user.email "qbantek@gmail.com"
 git config --global pull.rebase true
 git config --global push.autosetupremote true
-
-
-# GitHub
-brew install gh
-gh config set editor nvim
-gh config set git_protocol ssh --host github.com
-
-# setup git ssh to GitHub
-ssh-keygen -t ed25519 -C qbantek@gmail.com
-ssh-add ~/.ssh/id_ed25519
-gh auth login
 
 # setup gpg signed commits
 echo "Adding a GPG key:"
@@ -67,7 +83,14 @@ gpg_key_id=`gpg --list-signatures --with-colons | grep 'sig' | grep 'qbantek@gma
 ascii_key=`gpg --armor --export "$gpg_key_id"`
 git config --global user.signingkey $gpg_key_id
 git config --global commit.gpgsign true
+
+# GitHub
 gh gpg-key add $ascii_key
+gh config set editor nvim
+gh config set git_protocol ssh --host github.com
+ssh-keygen -t ed25519 -C qbantek@gmail.com
+ssh-add ~/.ssh/id_ed25519
+gh auth login
 
 # clone dotfiles from GitHub
 basedir="$HOME/dotfiles"
@@ -76,15 +99,10 @@ git clone git@github.com:qbantek/dotfiles.git "$basedir"
 cd "$basedir"
 git checkout mbpro # mac branch
 
-# shell, tools, terminal
-brew install gnupg  # make sure we have gpg available
-brew install tree # directory structure as a 'tree'
-brew install bat  # cooler cat
-brew install ripgrep
-brew install fd   # simple, fast and user-friendly alternative to find
-brew install fzf  # fuzzy finder
+# install fzf
 $(brew --prefix)/opt/fzf/install
-brew install zsh
+
+# install ohmyzsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
@@ -95,8 +113,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
   "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 git clone https://github.com/Aloxaf/fzf-tab \
   "$ZSH_CUSTOM/plugins/fzf-tab"
-brew install iterm2 # preferred terminal
-brew install tmux
 
 # Tmux Plugin Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
@@ -112,11 +128,7 @@ npm install --global npm@latest
 npm install --global yarn
 PATH="$PATH:`yarn global bin`"
 
-# go
-brew install golang
-
 # python
-brew install python
 python3 -m pip install --upgrade pip
 
 # rvm
@@ -131,16 +143,7 @@ source ~/.rvm/scripts/rvm
 brew install neovim --HEAD
 sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  python3 -m pip install --user --upgrade pynvim
-
-# more tools
-brew install --cask visual-studio-code
-brew install --cask docker
-brew install --cask google-chrome
-brew install --cask postman
-
-# stow
-brew install stow
+python3 -m pip install --user --upgrade pynvim
 
 # these files/folders will be replaced by stow
 rm -rf ~/.zshrc
