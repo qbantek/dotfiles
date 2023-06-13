@@ -31,11 +31,6 @@ alias rg="rg --hidden --glob '!.git'"
 # cooler cat
 alias cat='bat'
 
-# cheat sheets
-function cheat(){
-  curl cht.sh/$1
-}
-
 # nvim
 alias vim='nvim'
 
