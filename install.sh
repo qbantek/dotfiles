@@ -40,7 +40,6 @@ PACKAGES=(
 )
 echo "Installing brew packages..."
 brew install ${PACKAGES[@]}
-echo "Installing casks..."
 CASKS=(
     iterm2
     docker
