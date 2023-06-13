@@ -2,21 +2,33 @@
 
 { # This ensures the entire script is downloaded.
 
-# Install Command-line tools as dependency for Homebrew
-xcode-select --install # Sets the path for the active developer directory to /Library/Developer/CommandLineTools
-
 # brew & tools
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+# Check for Homebrew to be present, install if it's missing
+if test ! $(which brew); then
+    echo "Installing homebrew..."
+    # install xcode CLI
+    xcode-select --install
+    # install brew
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 brew analytics off
 brew update
-brew install mas #  command-line interface for Mac App Store
 
 # Xcode
-mas search xcode | head -5 # search for Xcode showing only the first 5 results
-mas install 497799835 # appid for Xcode
-sudo xcode-select --reset  # Sets the path for the active developer directory to /Applications/Xcode.app/Contents/Developer
-sudo softwareupdate --install --all --agree-to-license # Update all Apple software and auto agree to any licenses 
-sudo xcodebuild -license accept # agree to xcode license
+xcode-select -p &> /dev/null
+if [ $? -eq 0 ]; then
+  echo "Xcode is installed."
+  echo "Command Line Tools for Xcode have been installed."
+else
+  brew install mas #  command-line interface for Mac App Store
+  app_id=$(mas search Xcode | head -1 | awk '{print $1}')  
+  mas install "$app_id"
+
+  # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  PROD=$(softwareupdate -l | grep "\*.*Command Line" | tail -n 1 | sed 's/^[^C]* //')
+  softwareupdate --install "$PROD" --verbose --all --agree-to-license
+fi
 
 # OSx settings
 defaults write com.apple.Finder "AppleShowAllFiles" -bool true # show hidden files
@@ -82,10 +94,13 @@ git clone https://github.com/Aloxaf/fzf-tab \
   "$ZSH_CUSTOM/plugins/fzf-tab"
 brew install iterm2 # preferred terminal
 brew install tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# nvm 0.39.1 and latest lts node
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sh
+# Tmux Plugin Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+
+# nvm and latest lts node
+brew install nvm 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | sh
 NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -123,17 +138,17 @@ brew install --cask postman
 
 # stow
 brew install stow
+
 # these files/folders will be replaced by stow
 rm -rf ~/.zshrc
 rm -rf ~/.fzf.zsh
 rm -rf ~/.config/nvim
 rm -rf ~/.rvm/gemsets/global.gems
+
+# Invoking Stow
 stow gem                 
 stow git
 stow nvim
 stow rvm
 stow zsh
-
-# install nvim plugins
-nvim --headless +PlugInstall +qall
 } # This ensures the entire script is downloaded.
