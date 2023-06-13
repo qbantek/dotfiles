@@ -127,7 +127,6 @@ NVM_DIR="$HOME/.nvm"
 nvm install --lts
 npm install --global npm@latest
 npm install --global yarn
-PATH="$PATH:`yarn global bin`"
 
 # python
 python3 -m pip install --upgrade pip
