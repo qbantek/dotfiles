@@ -63,8 +63,13 @@ source "$HOME/.iterm2_shell_integration.zsh"
 # fzf completion and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --no-ignore \
-  --exclude .git --exclude node_modules --exclude tmp --exclude .cache'
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden \
+  --exclude .git \
+  --exclude node_modules \
+  --exclude tmp \
+  --exclude coverage \
+  --exclude lib \
+  --exclude .cache'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # To have paths colored instead of underlined
