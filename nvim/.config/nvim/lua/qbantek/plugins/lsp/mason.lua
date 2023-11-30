@@ -32,6 +32,7 @@ return {
         "html",
         "cssls",
         "lua_ls",
+        "solargraph",
       },
       -- auto-install configured servers (with lspconfig)
       automatic_installation = true, -- not the same as ensure_installed
@@ -42,6 +43,7 @@ return {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
         "eslint_d", -- js linter
+        "solargraph", -- ruby language server
       },
     })
   end,
