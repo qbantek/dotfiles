@@ -42,3 +42,6 @@ alias be='bundle exec'
 
 # ctags
 ctags=/usr/local/bin/ctags
+
+# git
+alias gu='git checkout master && git pull && git fetch -p && LANG=C git branch --no-color -vv | grep ": gone\]" | awk '\''{print $1}'\'' | xargs git branch -D'
