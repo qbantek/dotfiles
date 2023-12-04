@@ -25,23 +25,23 @@ return {
         { name = "buffer" },
       }, {
         { name = "cmp_git" },
-      })
+      }),
     })
 
     -- Use buffer source for `/`
     cmp.setup.cmdline("/", {
       sources = {
-        { name = "buffer" }
-      }
+        { name = "buffer" },
+      },
     })
 
     -- Use cmdline & path source for ":"
     cmp.setup.cmdline(":", {
       sources = cmp.config.sources({
-        { name = "path" }
+        { name = "path" },
       }, {
-        { name = "cmdline" }
-      })
+        { name = "cmdline" },
+      }),
     })
 
     cmp.setup({
@@ -52,7 +52,7 @@ return {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
-      },  
+      },
       window = {
         documentation = cmp.config.window.bordered(),
       },

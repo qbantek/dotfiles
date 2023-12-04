@@ -39,11 +39,12 @@ return {
     })
 
     mason_tool_installer.setup({
+      -- a list of all tools you want to ensure are installed upon
+      -- start; they should be the names Mason uses for each tool
       ensure_installed = {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
         "eslint_d", -- js linter
-        "solargraph", -- ruby language server
       },
     })
   end,
