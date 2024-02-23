@@ -3,6 +3,10 @@
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# User configuration
+bindkey -v
+bindkey -s '^e' 'vim $(fzf --border --preview "bat --color=always {}")^M'
+
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
@@ -16,9 +20,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -44,4 +45,8 @@ alias be='bundle exec'
 ctags=/usr/local/bin/ctags
 
 # git
-alias gu='git checkout master && git pull && git fetch -p && LANG=C git branch --no-color -vv | grep ": gone\]" | awk '\''{print $1}'\'' | xargs git branch -D'
+alias gu='trunk=$(git branch -a | grep -E "origin/(master|main)" | head -n 1 | sed "s/.*origin\///"); git checkout $trunk && git pull && git fetch -p && LANG=C git branch --no-color -vv | grep ": gone\]" | awk '\''{print $1}'\'' | xargs -I {} git branch -D {}'
+
+# Add aliases to GitHub Copilot CLI
+eval "$(github-copilot-cli alias -- "$0")"
+

@@ -42,18 +42,6 @@ plugins=(
 export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-bindkey -v
-bindkey -s '^e' 'vim $(fzf --border --preview "bat --color=always {}")^M'
-export LANG=en_US.UTF-8
-
-# https://unix.stackexchange.com/a/43728
-export LESS=-JMQRiFX
-
-# aliases
-source ~/.aliases
-
 # shell integration for iTerm2
 source "$HOME/.iterm2_shell_integration.zsh"
 
@@ -62,6 +50,7 @@ source "$HOME/.iterm2_shell_integration.zsh"
 
 # fzf completion and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Setting fd as the default source for fzf
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden \
   --exclude .git \
@@ -75,32 +64,14 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # To have paths colored instead of underlined
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
-# libpq
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/qbantek/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/qbantek/google-cloud-sdk/completion.zsh.inc'; fi
 
-# For compilers to find libpq you may need to set:
-export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+# aliases
+source ~/.aliases
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Add yarn bin folder to PATH
-export PATH="$PATH:`yarn global bin`"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/qbantek/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/qbantek/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/qbantek/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/qbantek/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Add aliases to GitHub Copilot CLI
-eval "$(github-copilot-cli alias -- "$0")"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-# Remove duplicates from PATH
-export PATH=$(echo $PATH | tr ':' '\n' | perl -lne 'chomp; print unless $k{$_}; $k{$_}++' | tr '\n' ':' | sed 's/:$//')
