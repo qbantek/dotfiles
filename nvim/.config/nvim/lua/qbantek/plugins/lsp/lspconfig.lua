@@ -89,13 +89,22 @@ return {
     })
 
     -- configure solargraph server
-    lspconfig["solargraph"].setup({
+    lspconfig.solargraph.setup({
+      cmd = {
+        "bundle",
+        "exec",
+        "solargraph",
+        "stdio",
+      },
+      filetypes = { "ruby" },
+      flags = { debounce_text_changes = 150 },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
         solargraph = {
           autoformat = true,
           completion = true,
+          definitions = true,
           diagnostics = true,
           folding = true,
           references = true,
