@@ -29,6 +29,7 @@ return {
       -- list of servers for mason to install
       ensure_installed = {
         "tsserver",
+        "astro",
         "html",
         "cssls",
         "lua_ls",

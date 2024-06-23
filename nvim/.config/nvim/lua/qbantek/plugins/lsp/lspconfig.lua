@@ -70,6 +70,12 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    -- configure typescript server
+    lspconfig["tsserver"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
     -- configure html server
     lspconfig["html"].setup({
       capabilities = capabilities,
@@ -77,7 +83,13 @@ return {
     })
 
     -- configure typescript server with plugin
-    lspconfig["tsserver"].setup({
+    lspconfig["astro"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- configure css server
+    lspconfig["cssls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
     })
