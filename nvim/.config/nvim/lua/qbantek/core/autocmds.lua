@@ -10,6 +10,15 @@ autocmd("TextYankPost", {
   end,
 })
 
+-- Lint on save
+autocmd({ "BufWritePost" }, {
+  callback = function()
+    -- try_lint without arguments runs the linters defined in `linters_by_ft`
+    -- for the current filetype
+    require("lint").try_lint()
+  end,
+})
+
 -- Remove whitespace on save
 autocmd("BufWritePre", {
   pattern = "",
