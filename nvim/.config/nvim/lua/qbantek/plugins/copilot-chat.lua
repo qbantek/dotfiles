@@ -71,7 +71,10 @@ return {
     -- Use unnamed register for the selection
     opts.selection = select.unnamed
 
-    local commit_prompt = "Write commit message for the changes following commitzen convention"
+    local commit_prompt = "Write a commit message for the change."
+      .. " Make sure the title has maximum 50 characters and message is"
+      .. " wrapped at 72 characters. Wrap the whole message in code"
+      .. " block with language gitcommit."
 
     -- Override the git prompt message
     opts.prompts.Commit = {
