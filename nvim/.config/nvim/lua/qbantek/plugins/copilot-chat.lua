@@ -177,7 +177,8 @@ return {
         local actions = require("CopilotChat.actions")
         require("CopilotChat.integrations.telescope").pick(actions.help_actions())
       end,
-      desc = "CopilotChat - Help actions",
+      desc = "CopilotChat - Diagnostic actions",
+      mode = { "n", "v" },
     },
 
     -- Show prompts actions with telescope
@@ -188,12 +189,13 @@ return {
         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
       end,
       desc = "CopilotChat - Prompt actions",
+      mode = { "n", "v" },
     },
     {
       "<leader>ap",
       ":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
       mode = "x",
-      desc = "CopilotChat - Prompt actions",
+      desc = "CopilotChat - Prompt actions (on selection)",
     },
 
     -- Code related commands
