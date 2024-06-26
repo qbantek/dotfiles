@@ -247,7 +247,7 @@ return {
           vim.cmd("CopilotChatBuffer " .. input)
         end
       end,
-      desc = "CopilotChat - Quick chat",
+      desc = "CopilotChat - Quick chat with your buffer",
     },
     -- Debug
     { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "CopilotChat - Debug Info" },
