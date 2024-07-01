@@ -4,6 +4,8 @@ return {
   event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
   config = function()
     local lint = require("lint")
+    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+    local eslint_d = lint.linters.eslint_d
 
     lint.linters_by_ft = {
       javascript = { "eslint_d" },
@@ -12,7 +14,16 @@ return {
       typescriptreact = { "eslint_d" },
     }
 
-    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+    eslint_d.args = {
+      "--no-warn-ignored",
+      "--format",
+      "json",
+      "--stdin",
+      "--stdin-filename",
+      function()
+        return vim.api.nvim_buf_get_name(0)
+      end,
+    }
 
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
