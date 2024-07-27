@@ -73,14 +73,14 @@ return {
     end
 
     -- Add which-key mappings
-    local wk = require("which-key")
-    wk.register({
-      ["<Leader>"] = {
-        t = {
-          name = "+Test",
-        },
-      },
-    })
+    -- local wk = require("which-key")
+    -- wk.register({
+    --   ["<Leader>"] = {
+    --     t = {
+    --       name = "+Test",
+    --     },
+    --   },
+    -- })
 
     neotest.setup({
       adapters = {

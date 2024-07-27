@@ -132,41 +132,41 @@ return {
     })
 
     -- Add which-key mappings
-    local wk = require("which-key")
-    wk.register({
-      g = {
-        m = {
-          name = "+Copilot Chat",
-          d = "Show diff",
-          p = "System prompt",
-          s = "Show selection",
-          y = "Yank diff",
-        },
-      },
-    })
-    wk.register({
-      ["<leader>"] = {
-        a = {
-          name = "+Copilot Chat",
-          h = "Help actions",
-          p = "Prompt actions",
-          e = "Explains code",
-          t = "Generate tests",
-          r = "Review code",
-          R = "Refactor code",
-          n = "Better namings",
-          v = "Open in vertical split",
-          x = "Inline chat",
-          i = "Ask input",
-          m = "Generate commit message",
-          M = "Generate commit message for staged changes",
-          q = "Quick chat",
-          d = "Debug info",
-          f = "Fix Diagnostic",
-          l = "Clear buffer and chat history",
-        },
-      },
-    })
+    -- local wk = require("which-key")
+    -- wk.register({
+    --   g = {
+    --     m = {
+    --       name = "+Copilot Chat",
+    --       d = "Show diff",
+    --       p = "System prompt",
+    --       s = "Show selection",
+    --       y = "Yank diff",
+    --     },
+    --   },
+    -- })
+    -- wk.register({
+    --   ["<leader>"] = {
+    --     a = {
+    --       name = "+Copilot Chat",
+    --       h = "Help actions",
+    --       p = "Prompt actions",
+    --       e = "Explains code",
+    --       t = "Generate tests",
+    --       r = "Review code",
+    --       R = "Refactor code",
+    --       n = "Better namings",
+    --       v = "Open in vertical split",
+    --       x = "Inline chat",
+    --       i = "Ask input",
+    --       m = "Generate commit message",
+    --       M = "Generate commit message for staged changes",
+    --       q = "Quick chat",
+    --       d = "Debug info",
+    --       f = "Fix Diagnostic",
+    --       l = "Clear buffer and chat history",
+    --     },
+    --   },
+    -- })
   end,
   event = "VeryLazy",
   keys = {
