@@ -53,9 +53,6 @@ alias gu='
     LANG=C git branch --no-color -vv | grep ": gone]" | awk '\''{print $1}'\'' | xargs -I {} git branch -D {}
 '
 
-# Add aliases to GitHub Copilot CLI
-eval "$(gh copilot alias -- zsh)"
-
 # ---- Eza (better ls) -----
 alias ls="eza --icons=always"
 
