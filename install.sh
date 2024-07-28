@@ -50,6 +50,9 @@ CASKS=(
 echo "Installing cask apps..."
 brew cask install ${CASKS[@]}
 
+# Copilot for GitHub
+gh extension install github/gh-copilot
+
 # Xcode
 xcode-select -p &> /dev/null
 if [ $? -eq 0 ]; then
