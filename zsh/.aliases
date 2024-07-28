@@ -3,6 +3,9 @@
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+source ".aliases_git"
+source ".aliases_zsh"
+
 # User configuration
 bindkey -v
 bindkey -s '^e' 'vim $(fzf --border --preview "bat --color=always {}")^M'
@@ -40,18 +43,6 @@ alias be='bundle exec'
 
 # ctags
 alias ctags='/usr/local/bin/ctags'
-
-# git alias for updating and cleaning local repository
-alias gu='
-    # Determine the main branch (master or main) from remote
-    trunk=$(git branch -a | grep -E "origin/(master|main)" | head -n 1 | sed "s/.*origin\///");
-
-    # Checkout the main branch, pull the latest changes, and prune any deleted remote branches
-    git checkout $trunk && git pull && git fetch -p &&
-
-    # List and delete local branches that have no corresponding remote branch
-    LANG=C git branch --no-color -vv | grep ": gone]" | awk '\''{print $1}'\'' | xargs -I {} git branch -D {}
-'
 
 # ---- Eza (better ls) -----
 alias ls="eza --icons=always"
