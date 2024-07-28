@@ -1,0 +1,63 @@
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+
+# User configuration
+bindkey -v
+bindkey -s '^e' 'vim $(fzf --border --preview "bat --color=always {}")^M'
+
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# search hidden files but not .git
+alias rg="rg --hidden --glob '!.git'"
+
+# cooler cat
+alias cat='bat'
+
+# nvim
+alias vi='nvim'
+
+# bundler
+alias be='bundle exec'
+
+# ctags
+alias ctags='/usr/local/bin/ctags'
+
+# git alias for updating and cleaning local repository
+alias gu='
+    # Determine the main branch (master or main) from remote
+    trunk=$(git branch -a | grep -E "origin/(master|main)" | head -n 1 | sed "s/.*origin\///");
+
+    # Checkout the main branch, pull the latest changes, and prune any deleted remote branches
+    git checkout $trunk && git pull && git fetch -p &&
+
+    # List and delete local branches that have no corresponding remote branch
+    LANG=C git branch --no-color -vv | grep ": gone]" | awk '\''{print $1}'\'' | xargs -I {} git branch -D {}
+'
+
+# Add aliases to GitHub Copilot CLI
+eval "$(gh copilot alias -- zsh)"
+
+# ---- Eza (better ls) -----
+alias ls="eza --icons=always"
+
+# ---- Zoxide (better cd) ----
+alias cd="z"
