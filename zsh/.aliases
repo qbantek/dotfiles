@@ -8,7 +8,7 @@ source ".aliases_zsh"
 
 # User configuration
 bindkey -v
-bindkey -s '^e' 'vim $(fzf --border --preview "bat --color=always {}")^M'
+bindkey -s '^e' 'nvim $(fzf --border --preview "bat --color=always {}")^M'
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
