@@ -4,7 +4,6 @@
 # For a full list of active aliases, run `alias`.
 
 source ".aliases_git"
-source ".aliases_zsh"
 
 # User configuration
 bindkey -v
