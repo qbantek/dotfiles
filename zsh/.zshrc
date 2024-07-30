@@ -55,7 +55,7 @@ _fzf_compgen_dir() {
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
 # The next line enables shell command completion for gcloud.
-# if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
 # aliases
 source ~/.aliases
