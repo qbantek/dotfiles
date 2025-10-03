@@ -12,6 +12,9 @@ export PATH="/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 
+# Load local environment variables
+[[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/qbantek/google-cloud-sdk/path.zsh.inc' ]; then
   . '/Users/qbantek/google-cloud-sdk/path.zsh.inc';
