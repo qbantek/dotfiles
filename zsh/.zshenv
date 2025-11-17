@@ -1,3 +1,6 @@
+# set the EDITOR variable to your preferred text editor
+export EDITOR='nvim'
+
 # Basic PATH setup
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -19,3 +22,4 @@ export PATH="/opt/homebrew/sbin:$PATH"
 if [ -f '/Users/qbantek/google-cloud-sdk/path.zsh.inc' ]; then
   . '/Users/qbantek/google-cloud-sdk/path.zsh.inc';
 fi
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
