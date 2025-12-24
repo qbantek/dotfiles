@@ -92,6 +92,7 @@ return {
       "dockerls",
       "gopls",
       "html",
+      -- "herb_ls",
       "ts_ls",
       "yamlls",
     }

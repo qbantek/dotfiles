@@ -32,6 +32,7 @@ return {
         "cssls",
         "dockerls",
         "gopls", -- Go language server
+        "herb_ls",
         "html",
         "lua_ls",
         "ts_ls",
