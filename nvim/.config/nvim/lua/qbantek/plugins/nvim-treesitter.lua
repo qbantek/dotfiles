@@ -8,21 +8,11 @@ return {
       "windwp/nvim-ts-autotag",
     },
     config = function()
-      -- import nvim-treesitter plugin
-      local treesitter = require("nvim-treesitter.configs")
-
-      -- configure treesitter
-      treesitter.setup({ -- enable syntax highlighting
-        highlight = {
-          enable = true,
-        },
-        -- enable indentation
+      require("nvim-treesitter").setup({
         indent = { enable = true },
-        -- enable autotagging (w/ nvim-ts-autotag plugin)
         autotag = {
           enable = true,
         },
-        -- ensure these language parsers are installed
         ensure_installed = {
           "bash",
           "css",
@@ -51,6 +41,19 @@ return {
             node_decremental = "<bs>",
           },
         },
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "*",
+        callback = function()
+          local filetype = vim.bo.filetype
+          if filetype:match("^Telescope") then
+            return
+          end
+          if vim.treesitter.language.get_lang(filetype) then
+            pcall(vim.treesitter.start)
+          end
+        end,
       })
 
       -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx

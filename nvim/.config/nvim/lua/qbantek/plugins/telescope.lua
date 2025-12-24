@@ -26,6 +26,9 @@ return {
       },
       defaults = {
         path_display = { "truncate" },
+        preview = {
+          treesitter = false,
+        },
         vimgrep_arguments = {
           "rg",
           "--no-heading",
