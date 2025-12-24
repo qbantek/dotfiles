@@ -4,14 +4,21 @@ return {
     "antoinemadec/FixCursorHold.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-neotest/nvim-nio",
-    "nvim-treesitter/nvim-treesitter",
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = function()
+        vim.cmd(":TSUpdate go")
+      end,
+    },
     {
       "fredrikaverpil/neotest-golang",
+      version = "*",
       dependencies = {
         "uga-rosa/utf8.nvim", -- Required for neotest-golang
-        "nvim-neotest/nvim-nio", -- Required for neotest-golang
       },
-      version = "*",
+      build = function()
+        vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }) -- Optional, but recommended
+      end,
     },
     "olimorris/neotest-rspec",
   },
@@ -74,7 +81,8 @@ return {
       vim.keymap.set("n", "<leader>" .. k, v.func, { desc = v.desc })
     end
 
-    local neotest_golang_opts = { sanitize_output = true } -- Specify custom configuration
+    -- Specify custom configuration
+    local neotest_golang_opts = { sanitize_output = true }
     neotest.setup({
       adapters = {
         require("neotest-rspec"),
