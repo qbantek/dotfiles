@@ -3,42 +3,49 @@
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# ============================================================================
+# General Utilities
+# ============================================================================
+
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+# ============================================================================
+# File Operations
+# ============================================================================
 
-# some more ls aliases
+# Eza (better ls)
+alias ls="eza --icons=always"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# search hidden files but not .git
-alias rg="rg --hidden --glob '!.git'"
-
-# cooler cat
+# Cooler cat
 alias cat='bat'
+
+# Search hidden files but not .git
+alias rg="rg --hidden --glob '!.git'"
 
 # nvim
 alias vi='nvim'
 
-# bundler
-alias be='bundle exec'
+# ============================================================================
+# Navigation
+# ============================================================================
 
-# ---- Eza (better ls) -----
-alias ls="eza --icons=always"
-
-# ---- Zoxide (better cd) ----
+# Zoxide (better cd)
 alias cd="z"
+
+# ============================================================================
+# Bundler
+# ============================================================================
+
+alias be='bundle exec'
+alias befast='be rspec --exclude-pattern "spec/system/**/*_spec.rb" .'
+
+# ============================================================================
+# Git Functions
+# ============================================================================
 
 # The name of the current branch
 # Back-compatibility wrapper for when this function was defined here in
@@ -93,12 +100,6 @@ function grename() {
   fi
 }
 
-#
-# Functions Work in Progress (WIP)
-# (sorted alphabetically by function name)
-# (order should follow README)
-#
-
 # Similar to `gunwip` but recursive "Unwips" all recent `--wip--` commits not just the last one
 function gunwipall() {
   local _commit=$(git log --grep='--wip--' --invert-grep --max-count=1 --format=format:%H)
@@ -114,12 +115,38 @@ function work_in_progress() {
   command git -c log.showSignature=false log -n 1 2>/dev/null | grep -q -- "--wip--" && echo "WIP!!"
 }
 
-#
-# Aliases
+function gbda() {
+  git branch --no-color --merged | command grep -vE "^([+*]|\s*($(git_main_branch)|$(git_develop_branch))\s*$)" | command xargs git branch --delete 2>/dev/null
+}
+
+# Copied and modified from James Roeder (jmaroeder) under MIT License
+# https://github.com/jmaroeder/plugin-git/blob/216723ef4f9e8dde399661c39c80bdf73f4076c4/functions/gbda.fish
+function gbds() {
+  local default_branch=$(git_main_branch)
+  (( ! $? )) || default_branch=$(git_develop_branch)
+
+  git for-each-ref refs/heads/ "--format=%(refname:short)" | \
+    while read branch; do
+      local merge_base=$(git merge-base $default_branch $branch)
+      if [[ $(git cherry $default_branch $(git commit-tree $(git rev-parse $branch\^{tree}) -p $merge_base -m _)) = -* ]]; then
+        git branch -D $branch
+      fi
+    done
+}
+
+# Update and clean local repository
+function gu() {
+  trunk=$(git branch -a | grep -E "origin/(master|main)" | head -n 1 | sed "s/.*origin\///")
+  git checkout $trunk && git pull && git fetch -p &&
+  LANG=C git branch --no-color -vv | grep ": gone]" | awk '{print $1}' | xargs -I {} git branch -D {}
+}
+
+# ============================================================================
+# Git Aliases
+# ============================================================================
 # (sorted alphabetically by command)
 # (order should follow README)
 # (in some cases force the alisas order to match README, like for example gke and gk)
-#
 
 alias grt='cd "$(git rev-parse --show-toplevel || echo .)"'
 alias ggpur='ggu'
@@ -149,26 +176,6 @@ alias gb='git branch'
 alias gba='git branch --all'
 alias gbd='git branch --delete'
 alias gbD='git branch --delete --force'
-
-function gbda() {
-  git branch --no-color --merged | command grep -vE "^([+*]|\s*($(git_main_branch)|$(git_develop_branch))\s*$)" | command xargs git branch --delete 2>/dev/null
-}
-
-# Copied and modified from James Roeder (jmaroeder) under MIT License
-# https://github.com/jmaroeder/plugin-git/blob/216723ef4f9e8dde399661c39c80bdf73f4076c4/functions/gbda.fish
-function gbds() {
-  local default_branch=$(git_main_branch)
-  (( ! $? )) || default_branch=$(git_develop_branch)
-
-  git for-each-ref refs/heads/ "--format=%(refname:short)" | \
-    while read branch; do
-      local merge_base=$(git merge-base $default_branch $branch)
-      if [[ $(git cherry $default_branch $(git commit-tree $(git rev-parse $branch\^{tree}) -p $merge_base -m _)) = -* ]]; then
-        git branch -D $branch
-      fi
-    done
-}
-
 alias gbgd='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '"'"'{print $1}'"'"' | xargs git branch -d'
 alias gbgD='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '"'"'{print $1}'"'"' | xargs git branch -D'
 alias gbm='git branch --move'
@@ -336,10 +343,3 @@ alias gstu='gsta --include-untracked'
 alias gtl='gtl(){ git tag --sort=-v:refname -n --list "${1}*" }; noglob gtl'
 alias gk='\gitk --all --branches &!'
 alias gke='\gitk --all $(git log --walk-reflogs --pretty=%h) &!'
-
-# git alias for updating and cleaning local repository
-alias gu='
-    trunk=$(git branch -a | grep -E "origin/(master|main)" | head -n 1 | sed "s/.*origin\///");
-    git checkout $trunk && git pull && git fetch -p &&
-    LANG=C git branch --no-color -vv | grep ": gone]" | awk '\''{print $1}'\'' | xargs -I {} git branch -D {}
-'
