@@ -343,3 +343,43 @@ alias gstu='gsta --include-untracked'
 alias gtl='gtl(){ git tag --sort=-v:refname -n --list "${1}*" }; noglob gtl'
 alias gk='\gitk --all --branches &!'
 alias gke='\gitk --all $(git log --walk-reflogs --pretty=%h) &!'
+
+pg17() {
+  echo 'Switching to PostgreSQL 17…'
+  brew services stop postgresql@15 >/dev/null 2>&1 || true
+  brew services start postgresql@17 >/dev/null 2>&1 || true
+
+  for i in {1..10}; do
+    if /opt/homebrew/opt/postgresql@17/bin/psql \
+      -h 127.0.0.1 -p 5432 -U qbantek -d postgres \
+      -c 'select 1;' >/dev/null 2>&1; then
+      /opt/homebrew/opt/postgresql@17/bin/psql \
+        -h 127.0.0.1 -p 5432 -U qbantek -d postgres \
+        -c 'show server_version;'
+      return 0
+    fi
+    sleep 1
+  done
+
+  echo 'ERROR: PostgreSQL 17 is not accepting connections on 127.0.0.1:5432'
+}
+
+pg15() {
+  echo 'Switching to PostgreSQL 15…'
+  brew services stop postgresql@17 >/dev/null 2>&1 || true
+  brew services start postgresql@15 >/dev/null 2>&1 || true
+
+  for i in {1..10}; do
+    if /opt/homebrew/opt/postgresql@15/bin/psql \
+      -h 127.0.0.1 -p 5432 -U qbantek -d postgres \
+      -c 'select 1;' >/dev/null 2>&1; then
+      /opt/homebrew/opt/postgresql@15/bin/psql \
+        -h 127.0.0.1 -p 5432 -U qbantek -d postgres \
+        -c 'show server_version;'
+      return 0
+    fi
+    sleep 1
+  done
+
+  echo 'ERROR: PostgreSQL 15 is not accepting connections on 127.0.0.1:5432'
+}

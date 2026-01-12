@@ -1,6 +1,10 @@
 # set the EDITOR variable to your preferred text editor
 export EDITOR='nvim'
 
+# PostgreSQL versions
+export PG17=/opt/homebrew/opt/postgresql@17/bin
+export PG15=/opt/homebrew/opt/postgresql@15/bin
+
 # Basic PATH setup
 export PATH="$HOME/.local/bin:$PATH"
 
