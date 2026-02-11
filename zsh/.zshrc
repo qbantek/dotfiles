@@ -1,16 +1,3 @@
-# Agent detection - only activate minimal mode for actual agents
-if [[ -n "$VSCODE_SHELL_INTEGRATION" ]]; then
-  POWERLEVEL9K_INSTANT_PROMPT=off
-
-  # Disable complex prompt features for AI agents
-  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-
-  # Ensure non-interactive mode
-  export DEBIAN_FRONTEND=noninteractive
-  export NONINTERACTIVE=1
-fi
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -60,36 +47,11 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Highlight settings
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
-# Theme selection - disable only for agents
-if [[ -n "$VSCODE_SHELL_INTEGRATION" ]]; then
-  ZSH_THEME=""  # Disable Powerlevel10k for agents
-else
-  # Powerlevel10k theme
-  source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-fi
+# Powerlevel10k theme
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
-if [[ -n "$VSCODE_SHELL_INTEGRATION" ]]; then
-  # minimal prompt for agents
-  PROMPT='%n@%m:%~%# '
-  RPROMPT=''
-  unsetopt CORRECT
-  unsetopt CORRECT_ALL
-  setopt NO_BEEP
-  setopt NO_HIST_BEEP
-  setopt NO_LIST_BEEP
-
-  # Agent-friendly aliases
-  alias rm='rm -f'
-  alias cp='cp -f'
-  alias mv='mv -f'
-  alias npm='npm --no-fund --no-audit'
-  alias yarn='yarn --non-interactive'
-  alias pip='pip --quiet'
-  alias git='git -c advice.detachedHead=false'
-else
-  # Powerlevel10k user config
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-fi
+# Powerlevel10k user config
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Mise
 eval "$(mise activate zsh)"
@@ -101,3 +63,11 @@ source ~/.aliases
 if [ -f '/Users/qbantek/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/qbantek/google-cloud-sdk/completion.zsh.inc'; fi
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/qbantek/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# Added by Antigravity
+export PATH="/Users/qbantek/.antigravity/antigravity/bin:$PATH"
