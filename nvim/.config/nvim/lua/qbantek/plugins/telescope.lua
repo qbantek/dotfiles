@@ -26,9 +26,6 @@ return {
       },
       defaults = {
         path_display = { "truncate" },
-        preview = {
-          treesitter = false,
-        },
         vimgrep_arguments = {
           "rg",
           "--no-heading",
@@ -67,8 +64,5 @@ return {
     keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
     keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
     keymap.set("n", "<leader>fu", "<cmd>Telescope resume<cr>", { desc = "Resume previous Telescope search" })
-    keymap.set("n", "<leader>fd", function()
-      vim.diagnostic.open_float(0, { scope = "buffer" })
-    end, { desc = "Show buffer diagnostics" })
   end,
 }

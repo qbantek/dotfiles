@@ -1,63 +1,82 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
-      -- "nvim-treesitter/nvim-treesitter-textobjects",
       "windwp/nvim-ts-autotag",
     },
     config = function()
+      local install_dir = vim.fn.stdpath("data") .. "/tree-sitter"
       require("nvim-treesitter").setup({
-        indent = { enable = true },
-        autotag = {
-          enable = true,
-        },
-        ensure_installed = {
-          "bash",
-          "css",
-          "dockerfile",
-          "gitignore",
-          "go",
-          "html",
-          "javascript",
-          "json",
-          "lua",
-          "markdown",
-          "markdown_inline",
-          "query",
-          "ruby",
-          "tsx",
-          "typescript",
-          "vim",
-          "yaml",
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
+        install_dir = install_dir,
+      })
+
+      vim.treesitter.language.register("embedded_template", { "eruby" })
+      vim.treesitter.language.register("tsx", { "typescriptreact", "javascriptreact" })
+      vim.treesitter.language.register("bash", { "sh" })
+
+      require("nvim-treesitter").install({
+        "bash",
+        "css",
+        "diff",
+        "dockerfile",
+        "embedded_template",
+        "gitignore",
+        "go",
+        "gomod",
+        "gowork",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "query",
+        "ruby",
+        "scss",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml",
       })
 
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "*",
-        callback = function()
-          local filetype = vim.bo.filetype
-          if filetype:match("^Telescope") then
-            return
-          end
-          if vim.treesitter.language.get_lang(filetype) then
-            pcall(vim.treesitter.start)
-          end
+        pattern = {
+          "bash",
+          "sh",
+          "css",
+          "diff",
+          "dockerfile",
+          "eruby",
+          "gitignore",
+          "go",
+          "gomod",
+          "gowork",
+          "html",
+          "javascript",
+          "javascriptreact",
+          "json",
+          "lua",
+          "markdown",
+          "query",
+          "ruby",
+          "scss",
+          "typescript",
+          "typescriptreact",
+          "vim",
+          "yaml",
+        },
+        callback = function(ev)
+          pcall(vim.treesitter.start, ev.buf)
+          vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          vim.wo[0][0].foldmethod = "expr"
+          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
 
-      -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-      -- require('ts_context_commentstring').setup {}
+      require("nvim-ts-autotag").setup()
     end,
   },
 }

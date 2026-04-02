@@ -76,15 +76,23 @@ return {
     end
 
     opts.selection = select.unnamed
+
+    local commit_prompt = "Write a commit message for the change using Conventional Commits format:"
+      .. "\n\n```\n<type>[optional scope]: <description>\n\n[optional body]\n```"
+      .. "\n\nRules:"
+      .. "\n- Type must be one of: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+      .. "\n- Scope is optional, a noun in parentheses describing the section of the codebase"
+      .. "\n- Description: imperative mood, lowercase, no trailing period, max ~50 chars after the type prefix"
+      .. "\n- Body: wrap at 72 characters, explain why not what"
+      .. "\n- Do NOT include any AI attribution, co-authored-by, or generated-by lines"
+      .. "\n- Wrap the whole message in a code block with language gitcommit."
+
     opts.prompts.Commit = {
-      prompt = "Write a commit message for the change."
-        .. " Make sure the title has maximum 50 characters and message is"
-        .. " wrapped at 72 characters. Wrap the whole message in code"
-        .. " block with language gitcommit.",
+      prompt = commit_prompt,
       selection = select.gitdiff,
     }
     opts.prompts.CommitStaged = {
-      prompt = prompts.CommitMessage,
+      prompt = commit_prompt,
       selection = function(source)
         return select.gitdiff(source, true)
       end,

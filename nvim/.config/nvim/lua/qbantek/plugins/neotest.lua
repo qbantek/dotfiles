@@ -5,12 +5,6 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-neotest/nvim-nio",
     {
-      "nvim-treesitter/nvim-treesitter",
-      build = function()
-        vim.cmd(":TSUpdate go")
-      end,
-    },
-    {
       "fredrikaverpil/neotest-golang",
       version = "*",
       dependencies = {
@@ -21,6 +15,7 @@ return {
       end,
     },
     "olimorris/neotest-rspec",
+    "zidhuss/neotest-minitest",
   },
   config = function()
     local neotest = require("neotest")
@@ -82,11 +77,15 @@ return {
     end
 
     -- Specify custom configuration
-    local neotest_golang_opts = { sanitize_output = true }
+    local neotest_golang_opts = {
+      runner = "gotestsum",
+      sanitize_output = true,
+    }
     neotest.setup({
       adapters = {
         require("neotest-rspec"),
-        require("neotest-golang")(neotest_golang_opts), -- Registration
+        require("neotest-golang")(neotest_golang_opts),
+        require("neotest-minitest"),
       },
     })
   end,
