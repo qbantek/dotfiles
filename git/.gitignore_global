@@ -33,3 +33,6 @@ node_modules
 
 # Misc
 .wakatime-project
+
+# Claude configuration files
+settings.local.json
