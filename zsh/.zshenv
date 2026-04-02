@@ -27,3 +27,14 @@ if [ -f '/Users/qbantek/google-cloud-sdk/path.zsh.inc' ]; then
   . '/Users/qbantek/google-cloud-sdk/path.zsh.inc';
 fi
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="/opt/homebrew/opt/mssql-tools18/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/qbantek/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# Added by Antigravity
+export PATH="/Users/qbantek/.antigravity/antigravity/bin:$PATH"
+
+# nanobrew
+export PATH="/opt/nanobrew/prefix/bin:$PATH"

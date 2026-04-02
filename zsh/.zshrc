@@ -63,11 +63,3 @@ source ~/.aliases
 if [ -f '/Users/qbantek/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/qbantek/google-cloud-sdk/completion.zsh.inc'; fi
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/qbantek/.lmstudio/bin"
-# End of LM Studio CLI section
-
-
-# Added by Antigravity
-export PATH="/Users/qbantek/.antigravity/antigravity/bin:$PATH"

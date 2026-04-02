@@ -383,3 +383,7 @@ pg15() {
 
   echo 'ERROR: PostgreSQL 15 is not accepting connections on 127.0.0.1:5432'
 }
+
+alias t='bin/rails test'
+
+alias csv='csvlens'
