@@ -1,6 +1,7 @@
 return {
   "williamboman/mason.nvim",
   dependencies = {
+    "neovim/nvim-lspconfig",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
@@ -26,22 +27,18 @@ return {
     })
 
     pcall(mason_lspconfig.setup, {
-      -- list of servers for mason to install
       ensure_installed = {
-        "astro",
         "cssls",
         "dockerls",
-        "gopls", -- Go language server
+        "gopls",
         "herb_ls",
         "html",
         "lua_ls",
         "ts_ls",
         "yamlls",
       },
-      -- auto-install configured servers (with lspconfig)
-      automatic_installation = true, -- not the same as ensure_installed
-      -- exclude tools that are not LSP servers
-      exclude = { "stylua", "copilot" },
+      automatic_installation = true,
+      automatic_enable = false,
     })
 
     pcall(mason_tool_installer.setup, {
