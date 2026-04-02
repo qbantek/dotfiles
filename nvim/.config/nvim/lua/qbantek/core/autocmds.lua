@@ -1,37 +1,22 @@
-local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
-local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
+local autocmd = vim.api.nvim_create_autocmd
 
--- Highlight on yank
-augroup("YankHighlight", { clear = true })
-autocmd("TextYankPost", {
-  group = "YankHighlight",
-  callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = "1000" })
-  end,
-})
-
--- Lint on save
-autocmd({ "BufWritePost" }, {
-  callback = function()
-    -- try_lint without arguments runs the linters defined in `linters_by_ft`
-    -- for the current filetype
-    pcall(require("lint").try_lint)
-  end,
-})
-
--- Remove whitespace on save
 autocmd("BufWritePre", {
-  pattern = "",
-  command = ":%s/\\s\\+$//e",
+  pattern = "*",
+  callback = function()
+    local excluded = { markdown = true, text = true }
+    if not excluded[vim.bo.filetype] then
+      vim.cmd([[:%s/\s\+$//e]])
+    end
+  end,
 })
 
--- Don't auto commenting new lines
-autocmd("BufEnter", {
-  pattern = "",
-  command = "set fo-=c fo-=r fo-=o",
+autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
 })
 
--- Enter insert mode when switching to terminal
 autocmd("TermOpen", {
   desc = "Configure terminal buffer",
   command = "setlocal listchars= nonumber norelativenumber nocursorline",
@@ -43,20 +28,16 @@ autocmd("TermOpen", {
   command = "startinsert",
 })
 
--- Close terminal buffer on process exit
 autocmd("BufLeave", {
-  desc = "Close terminal buffer on process exit",
   pattern = "term://*",
   command = "stopinsert",
 })
 
--- Disable folding in Telescope's result window.
 autocmd("FileType", {
   pattern = "TelescopeResults",
   command = [[setlocal nofoldenable]],
 })
 
--- Open help window in a vertical split to the right.
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = vim.api.nvim_create_augroup("help_window_right", {}),
   pattern = { "*.txt" },
@@ -67,8 +48,9 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end,
 })
 
--- Set filetype for eruby.yaml files
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "eruby.yaml",
-  command = "set filetype=yaml",
+vim.filetype.add({
+  pattern = {
+    [".*%.yaml%.erb"] = "yaml",
+    [".*%.yml%.erb"] = "yaml",
+  },
 })
