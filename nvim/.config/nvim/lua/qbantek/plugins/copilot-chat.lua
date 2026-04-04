@@ -75,8 +75,6 @@ return {
       return
     end
 
-    opts.selection = select.unnamed
-
     local commit_prompt = "Write a commit message for the change using Conventional Commits format:"
       .. "\n\n```\n<type>[optional scope]: <description>\n\n[optional body]\n```"
       .. "\n\nRules:"
@@ -199,11 +197,36 @@ return {
       mode = "x",
       desc = "Prompt actions (on selection)",
     },
-    { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "Explain code" },
-    { "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "Generate tests" },
-    { "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "Review code" },
-    { "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "Refactor code" },
-    { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "Better Naming" },
+    {
+      "<leader>ae",
+      "<cmd>CopilotChatExplain<cr>",
+      desc = "Explain code",
+      mode = { "n", "x" },
+    },
+    {
+      "<leader>at",
+      "<cmd>CopilotChatTests<cr>",
+      desc = "Generate tests",
+      mode = { "n", "x" },
+    },
+    {
+      "<leader>ar",
+      "<cmd>CopilotChatReview<cr>",
+      desc = "Review code",
+      mode = { "n", "x" },
+    },
+    {
+      "<leader>aR",
+      "<cmd>CopilotChatRefactor<cr>",
+      desc = "Refactor code",
+      mode = { "n", "x" },
+    },
+    {
+      "<leader>an",
+      "<cmd>CopilotChatBetterNamings<cr>",
+      desc = "Better Naming",
+      mode = { "n", "x" },
+    },
     {
       "<leader>av",
       ":CopilotChatVisual",
@@ -225,6 +248,7 @@ return {
         end
       end,
       desc = "Ask input",
+      mode = { "n", "x" },
     },
     {
       "<leader>am",
@@ -247,7 +271,12 @@ return {
       desc = "Quick chat with your buffer",
     },
     { "<leader>ad", "<cmd>CopilotChatDebugInfo<cr>", desc = "Debug Info" },
-    { "<leader>af", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix Diagnostic" },
+    {
+      "<leader>af",
+      "<cmd>CopilotChatFixDiagnostic<cr>",
+      desc = "Fix Diagnostic",
+      mode = { "n", "x" },
+    },
     { "<leader>al", "<cmd>CopilotChatReset<cr>", desc = "Clear buffer and chat history" },
     { "<leader>av", "<cmd>CopilotChatToggle<cr>", desc = "Toggle" },
   },

@@ -45,10 +45,13 @@ return {
       -- a list of all tools you want to ensure are installed upon
       -- start; they should be the names Mason uses for each tool
       ensure_installed = {
+        "erb-formatter",
         "eslint_d", -- js linter
         "goimports", -- Go imports tool
         "gofumpt", -- Go code formatter
-        "prettier", -- prettier formatter
+        "htmlbeautifier",
+        "prettier",
+        "prettierd",
         "stylua", -- lua formatter
         "yamlfix", -- yaml formatter
       },

@@ -2,7 +2,11 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "L3MON4D3/LuaSnip", -- snippet engine
+    {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+      build = "make install_jsregexp",
+    },
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-path", -- source for file system paths
     "onsails/lspkind.nvim", -- vs-code like pictograms

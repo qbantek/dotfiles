@@ -8,8 +8,7 @@ return {
     focus = true,
   },
   keys = {
-    { "<leader>D", "<cmd>Trouble diagnostics toggle<cr>", desc = "Show diagnostics in trouble" },
-    { "<leader>Dw", "<cmd>Trouble diagnostics toggle<cr>", desc = "Show workspace diagnostics in trouble" },
+    { "<leader>DD", "<cmd>Trouble diagnostics toggle<cr>", desc = "Show workspace diagnostics in trouble" },
     { "<leader>Dd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Show document diagnostics in trouble" },
     { "<leader>Dq", "<cmd>Trouble quickfix toggle<cr>", desc = "Show quickfix list in trouble" },
     { "<leader>Dl", "<cmd>Trouble loclist toggle<cr>", desc = "Show location list in trouble" },

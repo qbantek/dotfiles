@@ -8,7 +8,7 @@ return {
     conform.setup({
       formatters_by_ft = {
         css = { "prettierd", "prettier", stop_after_first = true },
-        eruby = { "htmlbeautifier" },
+        eruby = { "erb_format", "htmlbeautifier", stop_after_first = true },
         html = { "prettierd", "prettier", stop_after_first = true },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         javascriptreact = { "prettierd", "prettier", stop_after_first = true },
