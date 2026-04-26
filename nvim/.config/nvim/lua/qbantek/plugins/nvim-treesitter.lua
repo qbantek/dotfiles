@@ -72,6 +72,7 @@ return {
           pcall(vim.treesitter.start, ev.buf)
           vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
           vim.wo[0][0].foldmethod = "expr"
+          vim.wo[0][0].foldlevel = 1
           vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })

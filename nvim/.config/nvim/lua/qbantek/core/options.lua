@@ -13,6 +13,10 @@ opt.textwidth = 80
 -- line wrapping
 opt.wrap = false -- disable line wrapping
 
+-- folding
+opt.foldlevel = 1 -- keep top-level folds open and nested folds closed
+opt.foldlevelstart = 1 -- apply the same fold level when opening a buffer
+
 -- search settings
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive

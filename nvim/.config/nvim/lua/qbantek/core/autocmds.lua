@@ -17,6 +17,13 @@ autocmd("FileType", {
   end,
 })
 
+autocmd("TextYankPost", {
+  desc = "Highlight yanked text",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+  end,
+})
+
 autocmd("TermOpen", {
   desc = "Configure terminal buffer",
   command = "setlocal listchars= nonumber norelativenumber nocursorline",
