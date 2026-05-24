@@ -41,7 +41,12 @@ autocmd("BufLeave", {
 })
 
 autocmd("FileType", {
-  pattern = "TelescopeResults",
+  pattern = { "TelescopePrompt", "TelescopeResults" },
+  command = [[setlocal nofoldenable]],
+})
+
+autocmd("User", {
+  pattern = "TelescopePreviewerLoaded",
   command = [[setlocal nofoldenable]],
 })
 
