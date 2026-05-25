@@ -35,9 +35,6 @@ chat() {
     }" | jq -r '.choices[0].message.content'
 }
 
-# Zoxide
-eval "$(zoxide init zsh)"
-
 # # Autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -63,3 +60,6 @@ source ~/.aliases
 if [ -f '/Users/qbantek/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/qbantek/google-cloud-sdk/completion.zsh.inc'; fi
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Zoxide
+eval "$(zoxide init zsh)"
