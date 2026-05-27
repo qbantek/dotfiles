@@ -71,6 +71,12 @@ return {
         callback = function(ev)
           pcall(vim.treesitter.start, ev.buf)
           vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          -- vim-rails' `gf` on partials gates on ErubyAtCursor(), which reads
+          -- synstack() -> needs legacy :syntax. treesitter.start disables it,
+          -- so keep :syntax on for eruby (treesitter still wins visually).
+          if ev.match == "eruby" then
+            vim.bo[ev.buf].syntax = "eruby"
+          end
         end,
       })
 
