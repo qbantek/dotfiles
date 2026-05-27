@@ -1,14 +1,18 @@
-# Claude Code (and similar agents) run one-shot, non-interactive commands and
-# build a snapshot of this shell. Interactive-only setup — the prompt, ZLE
-# widgets, fuzzy finders, completions — adds nothing there, bloats the snapshot,
-# and some of it emits `can't change option: zle` errors. We gate all of that on
-# $CLAUDECODE below. Essentials that affect command resolution (mise, aliases,
-# and PATH/env from .zshenv) always load so agent commands behave correctly.
+# Claude Code, Codex, and similar agents run one-shot, non-interactive commands
+# and may build a snapshot of this shell. Interactive-only setup — the prompt,
+# ZLE widgets, fuzzy finders, completions — adds nothing there, bloats the
+# snapshot, and some of it emits `can't change option: zle` errors. We gate all
+# of that on $AGENT_SHELL below. Essentials that affect command resolution
+# (mise, aliases, and PATH/env from .zshenv) always load so agent commands behave
+# correctly.
+if [[ -n $CLAUDECODE || -n $CODEX_CI || -n $CODEX_SANDBOX || -n $CODEX_THREAD_ID ]]; then
+  export AGENT_SHELL=1
+fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -z $CLAUDECODE ]]; then
+if [[ -z $AGENT_SHELL ]]; then
   if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
   fi
@@ -38,9 +42,9 @@ source ~/.aliases
 
 # ----------------------------------------------------------------------------
 # Interactive-only setup: prompt, ZLE widgets, fuzzy finders, completions.
-# Skipped in Claude Code/agent shells.
+# Skipped in agent shells.
 # ----------------------------------------------------------------------------
-if [[ -z $CLAUDECODE ]]; then
+if [[ -z $AGENT_SHELL ]]; then
   # Keyboard bindings and vi-mode corrections
   source ~/.keyboard.zsh
 

@@ -33,10 +33,10 @@ alias vi='nvim'
 # Navigation
 # ============================================================================
 
-# Zoxide (better cd) — skip in Claude Code/agent shells, where the chpwd hook
+# Zoxide (better cd) — skip in agent shells, where the chpwd hook
 # isn't preserved in the shell snapshot (would trigger the doctor nag and let
 # `cd <name>` teleport to a frecent dir instead of the literal path).
-[[ -z $CLAUDECODE ]] && alias cd="z"
+[[ -z $AGENT_SHELL ]] && alias cd="z"
 
 # ============================================================================
 # Bundler
