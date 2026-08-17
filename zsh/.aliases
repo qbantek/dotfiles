@@ -16,7 +16,7 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # Eza (better ls)
 alias ls="eza --icons=always"
-alias ll='ls -alF'
+alias ll='ls -alF=always'
 alias la='ls -A'
 alias l='ls -CF'
 
