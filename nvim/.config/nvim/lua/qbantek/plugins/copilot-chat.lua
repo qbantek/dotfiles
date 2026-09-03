@@ -40,7 +40,7 @@ return {
   opts = {
     debug = false,
 
-    model = "gpt-5-mini",
+    model = "auto",
 
     question_header = "  " .. user .. " ",
     answer_header = "  Copilot ",
